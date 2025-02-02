@@ -44,6 +44,10 @@ function print_note(note, pageSetup)
     tex.sprint(string.format("\\hspace{%fbp}", note.x)) 
     tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{20bp}{24bp}\\byzfont", note.width))
 
+    if note.measureBarLeft ~= nil then
+        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarLeft]))
+    end
+
     if note.vareia then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap["vareia"]))
     end
@@ -72,6 +76,10 @@ function print_note(note, pageSetup)
 
     if note.vocalExpression ~= nil then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.vocalExpression]))
+    end
+
+    if note.measureBarRight ~= nil then
+        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarRight]))
     end
 
     tex.sprint("}");
@@ -106,7 +114,15 @@ end
 function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
-    tex.sprint(string.format("\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{20bp}{\\baselineskip}\\byzfont\\char\"%s\\char\"%s}}", martyria.width, pageSetup.martyriaDefaultColor, glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]))
+    tex.sprint(string.format("\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{20bp}{\\baselineskip}\\byzfont", martyria.width, pageSetup.martyriaDefaultColor))
+    if martyria.measureBarLeft ~= nil then
+        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarLeft]))
+    end
+    tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]));
+    if martyria.measureBarRight ~= nil then
+        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarRight]))
+    end
+    tex.sprint("}}");
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
     tex.sprint("}")

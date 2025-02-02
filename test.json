@@ -17,7 +17,7 @@
           "type": "dropcap",
           "x": 0,
           "y": -2.099999999999998,
-          "verticalAdjustment": 0,
+          "verticalAdjustment": 2.099999999999998,
           "width": 55.20000091552734,
           "content": "L",
           "fontSize": 60,
@@ -197,7 +197,8 @@
           "y": 0,
           "width": 14.736305236816406,
           "note": "martyriaNotePa",
-          "rootSign": "martyriaAlphaBelow"
+          "rootSign": "martyriaAlphaBelow",
+          "measureBarRight": "barlineSingle"
         },
         {
           "type": "note",
@@ -685,7 +686,8 @@
           "y": 164.16,
           "width": 13.836536407470703,
           "note": "martyriaNoteGa",
-          "rootSign": "martyriaNanaBelow"
+          "rootSign": "martyriaNanaBelow",
+          "measureBarRight": "barlineSingle"
         },
         {
           "type": "note",
@@ -824,6 +826,7 @@
             "x": 0.792,
             "y": 0.08299999999999996
           },
+          "measureBarRight": "barlineSingle",
           "lyrics": "at",
           "lyricsHorizontalOffset": -4.158954620361328,
           "melismaWidth": 23.36183316972523,
