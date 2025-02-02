@@ -27,6 +27,7 @@ function parse_notes(filename)
         for _, element in ipairs(line.elements) do
             if element.type == 'note' then print_note(element, data.pageSetup) end
             if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
+            if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
         end
         if #line.elements > 0 then 
             tex.sprint("\\newline")
@@ -108,5 +109,14 @@ function print_martyria(martyria, pageSetup)
     tex.sprint(string.format("\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{20bp}{\\baselineskip}\\byzfont\\char\"%s\\char\"%s}}", martyria.width, pageSetup.martyriaDefaultColor, glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]))
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
+    tex.sprint("}")
+end
+
+function print_drop_cap(dropCap, pageSetup) 
+    tex.sprint("\\mbox{")
+    tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
+    tex.sprint(string.format("\\raisebox{-17.5bp}{\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\dropcapfont{}%s}}}", dropCap.width, dropCap.color, dropCap.fontSize, dropCap.content))
+    tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
+    tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
 end

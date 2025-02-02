@@ -14,6 +14,16 @@
     {
       "elements": [
         {
+          "type": "dropcap",
+          "x": 0,
+          "y": -2.099999999999998,
+          "verticalAdjustment": 0,
+          "width": 55.20000091552734,
+          "content": "L",
+          "fontSize": 60,
+          "color": "800000"
+        },
+        {
           "type": "note",
           "x": 56.77309080600738,
           "y": 72,

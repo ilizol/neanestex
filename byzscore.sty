@@ -8,25 +8,27 @@
 \usetikzlibrary{positioning}
 
 \newfontfamily\byzfont{Neanes.otf}
+\newfontfamily\byzneumefont{Neanes.otf}
 \newfontfamily\lyricfont{SourceSerif4-Regular.otf}
+\newfontfamily\dropcapfont{PFGoudyInitials.ttf}
 
 \begin{luacode*}
     dofile("byzscore.lua")
 \end{luacode*}
 
-% Command to place a neume at (x, y) with an optional color
-\newcommand{\byzneume}[4][000000]{%
-    \node at (#2em, #3em) {\textcolor[HTML]{#1}{\fontsize{20bp}\selectfont \byzfont \char"#4}};%
-}
+\newlength{\byzneumesize}
+\setlength{\byzneumesize}{20bp}
 
-% Command to place lyrics at (x, y)
-\newcommand{\byzlyric}[3]{%
-    \node[anchor=north] at (#2em, #3em) {#1};%
-}
-
-% Command to draw a melismatic line from (x1, y1) to (x2, y2)
-\newcommand{\byzmelisma}[4]{%
-    \draw[thick] (#1em, #2em) to[out=0, in=180] (#3em, #4em);%
+% \byzneume
+% #1 optional color
+% #2 required hex unicode value
+% Example usage:
+% \byzneume[E000] prints an ison in the default color and size
+\newcommand{\byzneume}[2][000000]{%
+\textcolor[HTML]{#1}{%
+\fontsize{\byzneumesize}{\baselineskip}%
+\byzneumefont%
+\char"#2}%
 }
 
 % Command to draw a full score at the macro insertion point
