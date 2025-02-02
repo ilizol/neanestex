@@ -88,7 +88,7 @@ function print_note(note, pageSetup)
     if note.lyrics ~= nil then
         local lyricPos = note.alignLeft and "l" or "c"
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - note.lyricsHorizontalOffset))    
-        tex.sprint(string.format("\\raisebox{-17.5bp}{\\makebox[%fbp][%s]{\\fontsize{12bp}{\\baselineskip}\\lyricfont{}%s", note.width - note.lyricsHorizontalOffset, lyricPos, note.lyrics))
+        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{12bp}{\\baselineskip}\\lyricfont{}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, note.lyrics))
 
         -- Melismas
         if note.melismaWidth > 0 then
@@ -131,7 +131,7 @@ end
 function print_drop_cap(dropCap, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
-    tex.sprint(string.format("\\raisebox{-17.5bp}{\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\dropcapfont{}%s}}}", dropCap.width, dropCap.color, dropCap.fontSize, dropCap.content))
+    tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\dropcapfont{}%s}}}", pageSetup.lyricsVerticalOffset, dropCap.width, dropCap.color, dropCap.fontSize, dropCap.content))
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
