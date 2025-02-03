@@ -19,6 +19,7 @@ function parse_notes(filename)
     end
 
     tex.sprint(string.format("{\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
+    tex.sprint(string.format("{\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
     tex.sprint(string.format("{\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
 
     for _, line in ipairs(data.lines) do
@@ -33,8 +34,6 @@ function parse_notes(filename)
         if #line.elements > 0 then 
             tex.sprint("\\newline")
         end
-        --tex.print("\\end{tikzpicture}")
-        --tex.print("\\par")
     end
 
     tex.sprint("\\par}")

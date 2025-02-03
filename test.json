@@ -2,6 +2,7 @@
   "pageSetup": {
     "lineHeight": 54.720000000000006,
     "neumeDefaultFontSize": 20,
+    "lyricsDefaultFontSize": 12,
     "lyricsVerticalOffset": -18.6,
     "lyricsMelismaSpacing": 1.8,
     "lyricsMelismaThickness": 0.75,
