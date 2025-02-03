@@ -24,8 +24,6 @@
         {
           "type": "dropcap",
           "x": 0,
-          "y": 62.4,
-          "verticalAdjustment": 2.099999999999998,
           "width": 55.20000091552734,
           "content": "L",
           "fontSize": 60,
@@ -34,7 +32,6 @@
         {
           "type": "note",
           "x": 56.77309080600738,
-          "y": 136.5,
           "width": 29.292675018310547,
           "lyricsWidth": 21.94797134399414,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -48,7 +45,6 @@
         {
           "type": "note",
           "x": 89.79885571479798,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -56,7 +52,6 @@
         {
           "type": "note",
           "x": 107.58842601299288,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 4.451992034912109,
           "quantitativeNeume": "apostrofos",
@@ -68,7 +63,6 @@
         {
           "type": "note",
           "x": 125.37799631118774,
-          "y": 136.5,
           "width": 30.29241943359375,
           "lyricsWidth": 25.01996612548828,
           "quantitativeNeume": "oligon",
@@ -80,7 +74,6 @@
         {
           "type": "note",
           "x": 159.40350563526152,
-          "y": 136.5,
           "width": 30.29241943359375,
           "lyricsWidth": 27.431968688964844,
           "quantitativeNeume": "oligon",
@@ -93,7 +86,6 @@
         {
           "type": "note",
           "x": 193.42901495933538,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -101,7 +93,6 @@
         {
           "type": "note",
           "x": 211.2185852575302,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "apostrofos",
@@ -118,7 +109,6 @@
         {
           "type": "note",
           "x": 229.0081555557251,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -128,7 +118,6 @@
         {
           "type": "note",
           "x": 246.79772585391996,
-          "y": 136.5,
           "width": 41.14970397949219,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "ison",
@@ -141,7 +130,6 @@
         {
           "type": "note",
           "x": 291.6805197238922,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -150,7 +138,6 @@
         {
           "type": "note",
           "x": 309.4700900220871,
-          "y": 136.5,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon"
@@ -158,7 +145,6 @@
         {
           "type": "note",
           "x": 343.495599346161,
-          "y": 136.5,
           "width": 27.333160400390625,
           "lyricsWidth": 30.059955596923828,
           "quantitativeNeume": "petastiOligon",
@@ -171,7 +157,6 @@
         {
           "type": "note",
           "x": 374.56184963703157,
-          "y": 136.5,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -180,7 +165,6 @@
         {
           "type": "note",
           "x": 392.35141993522643,
-          "y": 136.5,
           "width": 12.196941375732422,
           "lyricsWidth": 0,
           "quantitativeNeume": "leimma1"
@@ -188,7 +172,6 @@
         {
           "type": "martyria",
           "x": 408.28145120143887,
-          "y": 64.5,
           "width": 14.736305236816406,
           "note": "martyriaNotePa",
           "rootSign": "martyriaAlphaBelow",
@@ -197,7 +180,6 @@
         {
           "type": "note",
           "x": 437.70758056640625,
-          "y": 136.5,
           "width": 30.29241943359375,
           "lyricsWidth": 30.76797866821289,
           "quantitativeNeume": "oligonKentimaAbove",
@@ -216,7 +198,6 @@
         {
           "type": "note",
           "x": 0,
-          "y": 191.22,
           "width": 32.531856536865234,
           "lyricsWidth": 13.391990661621094,
           "quantitativeNeume": "oligonApostrofosKentimata",
@@ -228,7 +209,6 @@
         {
           "type": "note",
           "x": 36.059484064737944,
-          "y": 191.22,
           "width": 32.531856536865234,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "oligonApostrofosKentimata",
@@ -242,7 +222,6 @@
         {
           "type": "note",
           "x": 72.1189681294759,
-          "y": 191.22,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -251,7 +230,6 @@
         {
           "type": "note",
           "x": 89.70307606506346,
-          "y": 191.22,
           "width": 35.03123474121094,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "runningElafron",
@@ -263,7 +241,6 @@
         {
           "type": "note",
           "x": 128.26193833414712,
-          "y": 191.22,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -273,7 +250,6 @@
         {
           "type": "note",
           "x": 162.08198529561358,
-          "y": 191.22,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -281,7 +257,6 @@
         {
           "type": "note",
           "x": 179.66609323120113,
-          "y": 191.22,
           "width": 30.47237777709961,
           "lyricsWidth": 20.531982421875,
           "quantitativeNeume": "ison",
@@ -294,7 +269,6 @@
         {
           "type": "martyria",
           "x": 213.66609853617345,
-          "y": 119.22000000000001,
           "width": 14.736305236816406,
           "note": "martyriaNotePa",
           "rootSign": "martyriaAlphaBelow"
@@ -302,7 +276,6 @@
         {
           "type": "note",
           "x": 235.93850809224443,
-          "y": 191.22,
           "width": 35.87102508544922,
           "lyricsWidth": 30.76797866821289,
           "quantitativeNeume": "oligonKentimaMiddle",
@@ -315,7 +288,6 @@
         {
           "type": "note",
           "x": 275.33716070556636,
-          "y": 191.22,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -326,7 +298,6 @@
         {
           "type": "note",
           "x": 309.1572076670328,
-          "y": 191.22,
           "width": 35.03123474121094,
           "lyricsWidth": 13.391990661621094,
           "quantitativeNeume": "runningElafron",
@@ -338,7 +309,6 @@
         {
           "type": "note",
           "x": 347.7160699361165,
-          "y": 191.22,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -348,7 +318,6 @@
         {
           "type": "note",
           "x": 365.3001778717041,
-          "y": 191.22,
           "width": 39.270172119140625,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "oligonIsonKentimata",
@@ -362,7 +331,6 @@
         {
           "type": "note",
           "x": 408.0979775187174,
-          "y": 191.22,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -371,7 +339,6 @@
         {
           "type": "note",
           "x": 425.68208545430497,
-          "y": 191.22,
           "width": 24.733806610107422,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "apostrofos",
@@ -385,7 +352,6 @@
         {
           "type": "note",
           "x": 453.9435195922851,
-          "y": 191.22,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -397,7 +363,6 @@
         {
           "type": "note",
           "x": 0,
-          "y": 245.93999999999997,
           "width": 30.29241943359375,
           "lyricsWidth": 20.291976928710938,
           "quantitativeNeume": "oligon",
@@ -409,7 +374,6 @@
         {
           "type": "note",
           "x": 33.72758406639099,
-          "y": 245.93999999999997,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligonKentimataBelow",
@@ -418,7 +382,6 @@
         {
           "type": "note",
           "x": 67.45516813278198,
-          "y": 245.93999999999997,
           "width": 29.292675018310547,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -427,7 +390,6 @@
         {
           "type": "note",
           "x": 100.18300778388976,
-          "y": 245.93999999999997,
           "width": 24.733806610107422,
           "lyricsWidth": 8.483997344970703,
           "quantitativeNeume": "apostrofos",
@@ -441,7 +403,6 @@
         {
           "type": "note",
           "x": 128.35197902679442,
-          "y": 245.93999999999997,
           "width": 7.997989654541016,
           "lyricsWidth": 0,
           "quantitativeNeume": "yporroi",
@@ -450,7 +411,6 @@
         {
           "type": "note",
           "x": 139.78513331413268,
-          "y": 245.93999999999997,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -460,7 +420,6 @@
         {
           "type": "note",
           "x": 173.51271738052367,
-          "y": 245.93999999999997,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -468,7 +427,6 @@
         {
           "type": "note",
           "x": 191.00436242103578,
-          "y": 245.93999999999997,
           "width": 30.47237777709961,
           "lyricsWidth": 29.09996795654297,
           "quantitativeNeume": "ison",
@@ -481,7 +439,6 @@
         {
           "type": "martyria",
           "x": 224.9119048309326,
-          "y": 173.93999999999997,
           "width": 14.736305236816406,
           "note": "martyriaNotePa",
           "rootSign": "martyriaAlphaBelow"
@@ -489,7 +446,6 @@
         {
           "type": "note",
           "x": 246.04337470054622,
-          "y": 245.93999999999997,
           "width": 40.96974563598633,
           "lyricsWidth": 29.09996795654297,
           "quantitativeNeume": "oligonKentimaAbove",
@@ -503,7 +459,6 @@
         {
           "type": "note",
           "x": 290.4482849693298,
-          "y": 245.93999999999997,
           "width": 30.47237777709961,
           "lyricsWidth": 0,
           "quantitativeNeume": "ison"
@@ -511,7 +466,6 @@
         {
           "type": "note",
           "x": 324.3558273792267,
-          "y": 245.93999999999997,
           "width": 14.056480407714844,
           "lyricsWidth": 4.451992034912109,
           "quantitativeNeume": "apostrofos",
@@ -523,7 +477,6 @@
         {
           "type": "note",
           "x": 341.8474724197388,
-          "y": 245.93999999999997,
           "width": 30.29241943359375,
           "lyricsWidth": 25.01996612548828,
           "quantitativeNeume": "oligon",
@@ -535,7 +488,6 @@
         {
           "type": "note",
           "x": 375.57505648612965,
-          "y": 245.93999999999997,
           "width": 29.292675018310547,
           "lyricsWidth": 27.431968688964844,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -549,7 +501,6 @@
         {
           "type": "note",
           "x": 408.30289613723744,
-          "y": 245.93999999999997,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -557,7 +508,6 @@
         {
           "type": "note",
           "x": 425.7945411777496,
-          "y": 245.93999999999997,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -565,7 +515,6 @@
         {
           "type": "note",
           "x": 443.28618621826166,
-          "y": 245.93999999999997,
           "width": 24.71381378173828,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "petastiApostrofos",
@@ -583,7 +532,6 @@
         {
           "type": "note",
           "x": 0,
-          "y": 300.66,
           "width": 35.03123474121094,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "runningElafron",
@@ -595,7 +543,6 @@
         {
           "type": "note",
           "x": 37.702598550584575,
-          "y": 300.66,
           "width": 14.756309509277344,
           "lyricsWidth": 0,
           "quantitativeNeume": "kentimata"
@@ -603,7 +550,6 @@
         {
           "type": "note",
           "x": 55.13027186923558,
-          "y": 300.66,
           "width": 29.292675018310547,
           "lyricsWidth": 30.059955596923828,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -617,7 +563,6 @@
         {
           "type": "note",
           "x": 87.09431069691976,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -626,7 +571,6 @@
         {
           "type": "note",
           "x": 103.82215491400825,
-          "y": 300.66,
           "width": 12.196941375732422,
           "lyricsWidth": 0,
           "quantitativeNeume": "leimma1"
@@ -634,7 +578,6 @@
         {
           "type": "martyria",
           "x": 118.69046009911432,
-          "y": 228.66,
           "width": 13.836536407470703,
           "note": "martyriaNoteGa",
           "rootSign": "martyriaNanaBelow",
@@ -643,7 +586,6 @@
         {
           "type": "note",
           "x": 142.31731493632,
-          "y": 300.66,
           "width": 39.270172119140625,
           "lyricsWidth": 30.76797866821289,
           "quantitativeNeume": "oligonIsonKentimata",
@@ -657,7 +599,6 @@
         {
           "type": "note",
           "x": 184.8595011181302,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 13.391990661621094,
           "quantitativeNeume": "apostrofos",
@@ -669,7 +610,6 @@
         {
           "type": "note",
           "x": 201.58734533521863,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -677,7 +617,6 @@
         {
           "type": "note",
           "x": 218.31518955230715,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "apostrofos",
@@ -691,7 +630,6 @@
         {
           "type": "note",
           "x": 238.54853784349234,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "apostrofos",
@@ -706,7 +644,6 @@
         {
           "type": "note",
           "x": 255.2763820605808,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -715,7 +652,6 @@
         {
           "type": "note",
           "x": 272.0042262776693,
-          "y": 300.66,
           "width": 40.96974563598633,
           "lyricsWidth": 20.531982421875,
           "quantitativeNeume": "oligon",
@@ -728,7 +664,6 @@
         {
           "type": "note",
           "x": 315.6453357230293,
-          "y": 300.66,
           "width": 7.997989654541016,
           "lyricsWidth": 0,
           "quantitativeNeume": "yporroi",
@@ -737,7 +672,6 @@
         {
           "type": "note",
           "x": 326.3146891869439,
-          "y": 300.66,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -746,7 +680,6 @@
         {
           "type": "martyria",
           "x": 359.27847242991135,
-          "y": 228.66,
           "width": 15.656078338623047,
           "note": "martyriaNoteZo",
           "rootSign": "martyriaZoBelow"
@@ -754,7 +687,6 @@
         {
           "type": "note",
           "x": 380.56591457790796,
-          "y": 300.66,
           "width": 40.02997970581055,
           "lyricsWidth": 10.00799560546875,
           "quantitativeNeume": "oligonKentimaMiddle",
@@ -769,7 +701,6 @@
         {
           "type": "note",
           "x": 426.5583420011733,
-          "y": 300.66,
           "width": 24.71381378173828,
           "lyricsWidth": 24.09598159790039,
           "quantitativeNeume": "petastiKentima",
@@ -782,7 +713,6 @@
         {
           "type": "note",
           "x": 453.94351959228516,
-          "y": 300.66,
           "width": 14.056480407714844,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "apostrofos",
@@ -798,7 +728,6 @@
         {
           "type": "note",
           "x": 1.5877532958984375,
-          "y": 355.38000000000005,
           "width": 14.056480407714844,
           "lyricsWidth": 17.23198699951172,
           "quantitativeNeume": "apostrofos",
@@ -810,7 +739,6 @@
         {
           "type": "note",
           "x": 21.6580300095502,
-          "y": 355.38000000000005,
           "width": 30.29241943359375,
           "lyricsWidth": 27.959964752197266,
           "quantitativeNeume": "oligon",
@@ -822,7 +750,6 @@
         {
           "type": "note",
           "x": 56.10271979388068,
-          "y": 355.38000000000005,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -831,7 +758,6 @@
         {
           "type": "note",
           "x": 90.54740957821117,
-          "y": 355.38000000000005,
           "width": 7.997989654541016,
           "lyricsWidth": 0,
           "quantitativeNeume": "yporroi",
@@ -840,7 +766,6 @@
         {
           "type": "note",
           "x": 102.6976695834889,
-          "y": 355.38000000000005,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -848,7 +773,6 @@
         {
           "type": "note",
           "x": 120.90642034194047,
-          "y": 355.38000000000005,
           "width": 24.733806610107422,
           "lyricsWidth": 10.835987091064453,
           "quantitativeNeume": "apostrofos",
@@ -862,7 +786,6 @@
         {
           "type": "note",
           "x": 149.7924973027846,
-          "y": 355.38000000000005,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -871,7 +794,6 @@
         {
           "type": "note",
           "x": 168.00124806123617,
-          "y": 355.38000000000005,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon"
@@ -879,7 +801,6 @@
         {
           "type": "note",
           "x": 202.44593784556665,
-          "y": 355.38000000000005,
           "width": 30.29241943359375,
           "lyricsWidth": 16.595993041992188,
           "quantitativeNeume": "oligon",
@@ -892,7 +813,6 @@
         {
           "type": "note",
           "x": 236.89062762989712,
-          "y": 355.38000000000005,
           "width": 29.292675018310547,
           "lyricsWidth": 19.079967498779297,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -907,7 +827,6 @@
         {
           "type": "note",
           "x": 270.33557299894443,
-          "y": 355.38000000000005,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -916,7 +835,6 @@
         {
           "type": "note",
           "x": 288.54432375739594,
-          "y": 355.38000000000005,
           "width": 29.292675018310547,
           "lyricsWidth": 14.027973175048828,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -929,7 +847,6 @@
         {
           "type": "note",
           "x": 321.9892691264433,
-          "y": 355.38000000000005,
           "width": 24.733806610107422,
           "lyricsWidth": 11.963996887207031,
           "quantitativeNeume": "apostrofos",
@@ -944,7 +861,6 @@
         {
           "type": "note",
           "x": 350.87534608728737,
-          "y": 355.38000000000005,
           "width": 7.997989654541016,
           "lyricsWidth": 0,
           "quantitativeNeume": "yporroi",
@@ -954,7 +870,6 @@
         {
           "type": "note",
           "x": 363.02560609256517,
-          "y": 355.38000000000005,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -965,7 +880,6 @@
         {
           "type": "note",
           "x": 397.47029587689553,
-          "y": 355.38000000000005,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -974,7 +888,6 @@
         {
           "type": "note",
           "x": 415.6790466353473,
-          "y": 355.38000000000005,
           "width": 30.47237777709961,
           "lyricsWidth": 21.335987091064453,
           "quantitativeNeume": "ison",
@@ -987,7 +900,6 @@
         {
           "type": "martyria",
           "x": 450.30369476318356,
-          "y": 283.38000000000005,
           "width": 14.736305236816406,
           "note": "martyriaNotePa",
           "rootSign": "martyriaAlphaBelow"
@@ -999,7 +911,6 @@
         {
           "type": "note",
           "x": 0,
-          "y": 410.1000000000001,
           "width": 35.87102508544922,
           "lyricsWidth": 29.531982421875,
           "quantitativeNeume": "oligonKentimaMiddle",
@@ -1012,7 +923,6 @@
         {
           "type": "note",
           "x": 39.551815818337836,
-          "y": 410.1000000000001,
           "width": 30.47237777709961,
           "lyricsWidth": 4.451992034912109,
           "quantitativeNeume": "ison",
@@ -1024,7 +934,6 @@
         {
           "type": "note",
           "x": 73.70498432832603,
-          "y": 410.1000000000001,
           "width": 30.29241943359375,
           "lyricsWidth": 17.19598388671875,
           "quantitativeNeume": "oligonYpsiliRight",
@@ -1037,7 +946,6 @@
         {
           "type": "note",
           "x": 107.67819449480841,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -1045,7 +953,6 @@
         {
           "type": "note",
           "x": 125.41546563541185,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "apostrofos",
@@ -1059,7 +966,6 @@
         {
           "type": "note",
           "x": 146.65824085011204,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "apostrofos",
@@ -1074,7 +980,6 @@
         {
           "type": "note",
           "x": 164.39551199071545,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -1083,7 +988,6 @@
         {
           "type": "note",
           "x": 182.1327831313189,
-          "y": 410.1000000000001,
           "width": 40.96974563598633,
           "lyricsWidth": 30.29996109008789,
           "quantitativeNeume": "oligonKentimaBelow",
@@ -1097,7 +1001,6 @@
         {
           "type": "note",
           "x": 226.78331950019387,
-          "y": 410.1000000000001,
           "width": 7.997989654541016,
           "lyricsWidth": 0,
           "quantitativeNeume": "yporroi",
@@ -1106,7 +1009,6 @@
         {
           "type": "note",
           "x": 238.46209988762348,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -1114,7 +1016,6 @@
         {
           "type": "note",
           "x": 256.19937102822695,
-          "y": 410.1000000000001,
           "width": 29.292675018310547,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligonKentimataAbove",
@@ -1123,7 +1024,6 @@
         {
           "type": "note",
           "x": 289.1728367794261,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -1132,7 +1032,6 @@
         {
           "type": "martyria",
           "x": 306.91010792002953,
-          "y": 338.1000000000001,
           "width": 13.836536407470703,
           "note": "martyriaNoteGa",
           "rootSign": "martyriaNanaBelow"
@@ -1140,7 +1039,6 @@
         {
           "type": "note",
           "x": 330.9874350603889,
-          "y": 410.1000000000001,
           "width": 30.47237777709961,
           "lyricsWidth": 32.77196502685547,
           "quantitativeNeume": "ison",
@@ -1154,7 +1052,6 @@
         {
           "type": "note",
           "x": 365.1406035703771,
-          "y": 410.1000000000001,
           "width": 14.756309509277344,
           "lyricsWidth": 0,
           "quantitativeNeume": "kentimata",
@@ -1163,7 +1060,6 @@
         {
           "type": "note",
           "x": 383.577703812543,
-          "y": 410.1000000000001,
           "width": 30.47237777709961,
           "lyricsWidth": 13.391990661621094,
           "quantitativeNeume": "ison",
@@ -1176,7 +1072,6 @@
         {
           "type": "note",
           "x": 417.73087232253124,
-          "y": 410.1000000000001,
           "width": 32.531856536865234,
           "lyricsWidth": 14.267990112304688,
           "quantitativeNeume": "oligonApostrofosKentimata",
@@ -1190,7 +1085,6 @@
         {
           "type": "note",
           "x": 453.9435195922851,
-          "y": 410.1000000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -1203,7 +1097,6 @@
         {
           "type": "note",
           "x": 0,
-          "y": 464.8200000000001,
           "width": 35.03123474121094,
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "runningElafron",
@@ -1216,7 +1109,6 @@
         {
           "type": "note",
           "x": 37.191234741210934,
-          "y": 464.8200000000001,
           "width": 30.29241943359375,
           "lyricsWidth": 20.291976928710938,
           "quantitativeNeume": "oligon",
@@ -1229,7 +1121,6 @@
         {
           "type": "note",
           "x": 69.64365417480468,
-          "y": 464.8200000000001,
           "width": 14.756309509277344,
           "lyricsWidth": 0,
           "quantitativeNeume": "kentimata"
@@ -1237,7 +1128,6 @@
         {
           "type": "note",
           "x": 86.559963684082,
-          "y": 464.8200000000001,
           "width": 24.853775024414062,
           "lyricsWidth": 0,
           "quantitativeNeume": "petasti",
@@ -1247,7 +1137,6 @@
         {
           "type": "note",
           "x": 113.57373870849608,
-          "y": 464.8200000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos",
@@ -1256,7 +1145,6 @@
         {
           "type": "note",
           "x": 129.79021911621092,
-          "y": 464.8200000000001,
           "width": 41.14970397949219,
           "lyricsWidth": 8.483997344970703,
           "quantitativeNeume": "ison",
@@ -1271,7 +1159,6 @@
         {
           "type": "note",
           "x": 173.09992309570308,
-          "y": 464.8200000000001,
           "width": 7.997989654541016,
           "lyricsWidth": 0,
           "quantitativeNeume": "yporroi",
@@ -1280,7 +1167,6 @@
         {
           "type": "note",
           "x": 183.25791275024412,
-          "y": 464.8200000000001,
           "width": 30.29241943359375,
           "lyricsWidth": 0,
           "quantitativeNeume": "oligon",
@@ -1290,7 +1176,6 @@
         {
           "type": "note",
           "x": 215.71033218383786,
-          "y": 464.8200000000001,
           "width": 14.056480407714844,
           "lyricsWidth": 0,
           "quantitativeNeume": "apostrofos"
@@ -1298,7 +1183,6 @@
         {
           "type": "note",
           "x": 231.9268125915527,
-          "y": 464.8200000000001,
           "width": 30.47237777709961,
           "lyricsWidth": 29.09996795654297,
           "quantitativeNeume": "ison",
@@ -1311,7 +1195,6 @@
         {
           "type": "martyria",
           "x": 450.30369476318356,
-          "y": 392.8200000000001,
           "width": 14.736305236816406,
           "note": "martyriaNotePa",
           "rootSign": "martyriaAlphaBelow"
