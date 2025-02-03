@@ -78,6 +78,11 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.isonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.ison], offset.x))
     end
 
+    if note.measureNumber ~= nil then
+        local offset = get_mark_offset(note.quantitativeNeume, note.measureNumber, note.measureNumberOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.measureNumberDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.measureNumber], offset.x))
+    end
+
     tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.quantitativeNeume]))
 
     if note.vocalExpression ~= nil then
