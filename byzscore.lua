@@ -11,6 +11,7 @@ function parse_notes(filename)
     local data = json.decode(read_json(filename))
 
     local glyphnames = json.decode(read_json("glyphnames.json"))
+    font_metadata = json.decode(read_json("neanes.metadata.json"))
 
     glyphNameToCodepointMap = {}
 
@@ -53,23 +54,28 @@ function print_note(note, pageSetup)
     end
 
     if note.time ~= nil then
-        tex.sprint(string.format("\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}\\hspace{-%fem}", note.timeOffset.x, note.timeOffset.y, glyphNameToCodepointMap[note.time], note.timeOffset.x))
+        local offset = get_mark_offset(note.quantitativeNeume, note.time, note.timeOffset)
+        tex.sprint(string.format("\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.time], offset.x))
     end
 
     if note.gorgon ~= nil then
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, note.gorgonOffset.x, note.gorgonOffset.y, glyphNameToCodepointMap[note.gorgon], note.gorgonOffset.x))
+        local offset = get_mark_offset(note.quantitativeNeume, note.gorgon, note.gorgonOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgon], offset.x))
     end
 
     if note.fthora ~= nil then
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, note.fthoraOffset.x, note.fthoraOffset.y, glyphNameToCodepointMap[note.fthora], note.fthoraOffset.x))
+        local offset = get_mark_offset(note.quantitativeNeume, note.fthora, note.fthoraOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.fthora], offset.x))
     end
 
     if note.accidental ~= nil then
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.accidentalDefaultColor, note.accidentalOffset.x, note.accidentalOffset.y, glyphNameToCodepointMap[note.accidental], note.accidentalOffset.x))
+        local offset = get_mark_offset(note.quantitativeNeume, note.accidental, note.accidentalOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.accidentalDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.accidental], offset.x))
     end
 
     if note.ison ~= nil then
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.isonDefaultColor, note.isonOffset.x, note.isonOffset.y, glyphNameToCodepointMap[note.ison], note.isonOffset.x))
+        local offset = get_mark_offset(note.quantitativeNeume, note.ison, note.isonOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.isonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.ison], offset.x))
     end
 
     tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.quantitativeNeume]))
@@ -135,4 +141,44 @@ function print_drop_cap(dropCap, pageSetup)
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
+end
+
+function get_mark_offset(base, mark, extra_offset)
+    local mark_anchor_name = find_mark_anchor_name(base, mark)
+
+    if mark_anchor_name == nil then
+      texio.write_nl("warning", "Missing anchor for base: " .. base ..  "mark: " .. mark)
+      return { x = 0, y = 0 }
+    end
+
+    local mark_anchor = font_metadata.glyphsWithAnchors[mark][
+      mark_anchor_name
+    ];
+
+    local base_anchor = font_metadata.glyphsWithAnchors[base][
+      mark_anchor_name
+    ];
+
+    local extra_x = 0
+    local extra_y = 0
+
+    if extra_offset ~= nil then
+        extra_x = extra_offset.x
+        extra_y = extra_offset.y
+    end
+
+    return {
+      x = base_anchor[1] - mark_anchor[1] + extra_x,
+      y = -(base_anchor[2] - mark_anchor[2]) + extra_y,
+    }
+end
+
+function find_mark_anchor_name(base, mark)
+    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
+        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
+            return anchor_name
+        end
+    end
+
+    return nil 
 end
