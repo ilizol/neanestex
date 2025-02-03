@@ -4,6 +4,7 @@
     "neumeDefaultFontSize": 20,
     "lyricsVerticalOffset": -18.6,
     "lyricsMelismaSpacing": 1.8,
+    "lyricsMelismaThickness": 0.75,
     "accidentalDefaultColor": "800000",
     "fthoraDefaultColor": "800000",
     "gorgonDefaultColor": "800000",

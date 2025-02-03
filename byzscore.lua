@@ -18,7 +18,8 @@ function parse_notes(filename)
         glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
     end
 
-    tex.sprint(string.format("{\\setlength{\\baselineskip}{%fpt}", data.pageSetup.lineHeight))
+    tex.sprint(string.format("{\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
+    tex.sprint(string.format("{\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
 
     for _, line in ipairs(data.lines) do
         if #line.elements > 0 then 
@@ -42,7 +43,7 @@ end
 function print_note(note, pageSetup)
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", note.x)) 
-    tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{20bp}{24bp}\\byzfont", note.width))
+    tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", note.width))
 
     if note.measureBarLeft ~= nil then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarLeft]))
@@ -88,7 +89,7 @@ function print_note(note, pageSetup)
     if note.lyrics ~= nil then
         local lyricPos = note.alignLeft and "l" or "c"
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - note.lyricsHorizontalOffset))    
-        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{12bp}{\\baselineskip}\\lyricfont{}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, note.lyrics))
+        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{12bp}{\\baselineskip}\\byzlyricfont{}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, note.lyrics))
 
         -- Melismas
         if note.melismaWidth > 0 then
@@ -97,7 +98,7 @@ function print_note(note, pageSetup)
                     tex.sprint(string.format("\\hspace{%fbp}\\makebox[0pt]{-}\\hspace{-%fbp}", hyphenOffset, hyphenOffset))
                 end
             else
-                tex.sprint(string.format("\\hspace{%fbp}\\rule{%fbp}{0.75pt}\\hspace{-%fbp}", pageSetup.lyricsMelismaSpacing, note.melismaWidth - pageSetup.lyricsMelismaSpacing, note.melismaWidth))
+                tex.sprint(string.format("\\hspace{%fbp}\\rule{%fbp}{%fbp}\\hspace{-%fbp}", pageSetup.lyricsMelismaSpacing, note.melismaWidth - pageSetup.lyricsMelismaSpacing, pageSetup.lyricsMelismaThickness, note.melismaWidth))
             end
         end
 
@@ -114,7 +115,7 @@ end
 function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
-    tex.sprint(string.format("\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{20bp}{\\baselineskip}\\byzfont", martyria.width, pageSetup.martyriaDefaultColor))
+    tex.sprint(string.format("\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", martyria.width, pageSetup.martyriaDefaultColor))
     if martyria.measureBarLeft ~= nil then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarLeft]))
     end
@@ -131,7 +132,7 @@ end
 function print_drop_cap(dropCap, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
-    tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\dropcapfont{}%s}}}", pageSetup.lyricsVerticalOffset, dropCap.width, dropCap.color, dropCap.fontSize, dropCap.content))
+    tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\byzdropcapfont{}%s}}}", pageSetup.lyricsVerticalOffset, dropCap.width, dropCap.color, dropCap.fontSize, dropCap.content))
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
