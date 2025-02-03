@@ -94,7 +94,7 @@ function print_note(note, pageSetup)
         if note.melismaWidth > 0 then
             if note.isHyphen then
                 for _, hyphenOffset in ipairs(note.hyphenOffsets) do
-                    tex.sprint(string.format("\\hspace{%fbp}\\makebox[0pt]{-}\\hspace{-%fbp}", hyphenOffset, hyphenOffset))
+                    tex.sprint(string.format("\\hspace{%fbp}\\rlap{-}\\hspace{-%fbp}", hyphenOffset, hyphenOffset))
                 end
             else
                 tex.sprint(string.format("\\hspace{%fbp}\\rule{%fbp}{%fbp}\\hspace{-%fbp}", pageSetup.lyricsMelismaSpacing, note.melismaWidth - pageSetup.lyricsMelismaSpacing, pageSetup.lyricsMelismaThickness, note.melismaWidth))
