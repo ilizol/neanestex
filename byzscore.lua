@@ -125,7 +125,7 @@ end
 function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
-    tex.sprint(string.format("\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", martyria.width, pageSetup.martyriaDefaultColor))
+    tex.sprint(string.format("{\\textcolor[HTML]{%s}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", pageSetup.martyriaDefaultColor))
     if martyria.measureBarLeft ~= nil then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarLeft]))
     end
@@ -142,7 +142,7 @@ end
 function print_drop_cap(dropCap, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
-    tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp]{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\byzdropcapfont{}%s}}}", pageSetup.lyricsVerticalOffset, dropCap.width, dropCap.color, dropCap.fontSize, dropCap.content))
+    tex.sprint(string.format("\\raisebox{%fbp}{{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\byzdropcapfont{}%s}}}", pageSetup.lyricsVerticalOffset, dropCap.color, dropCap.fontSize, dropCap.content))    
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
