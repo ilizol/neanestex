@@ -45,7 +45,7 @@ function print_note(note, pageSetup)
     tex.sprint(string.format("\\hspace{%fbp}", note.x)) 
     tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", note.width))
 
-    if note.measureBarLeft ~= nil then
+    if note.measureBarLeft then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarLeft]))
     end
 
@@ -53,50 +53,75 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap["vareia"]))
     end
 
-    if note.time ~= nil then
+    -- If the user specified an additional offset, we must manually position the marks
+    if note.timeOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.time, note.timeOffset)
         tex.sprint(string.format("\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.time], offset.x))
     end
 
-    if note.gorgon ~= nil then
+    if note.gorgonOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.gorgon, note.gorgonOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgon], offset.x))
     end
 
-    if note.fthora ~= nil then
+    if note.fthoraOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.fthora, note.fthoraOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.fthora], offset.x))
     end
 
-    if note.accidental ~= nil then
+    if note.accidentalOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.accidental, note.accidentalOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.accidentalDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.accidental], offset.x))
     end
 
-    if note.ison ~= nil then
+    if note.isonOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.ison, note.isonOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.isonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.ison], offset.x))
     end
 
-    if note.measureNumber ~= nil then
+    if note.measureNumberOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.measureNumber, note.measureNumberOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.measureNumberDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.measureNumber], offset.x))
     end
 
     tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.quantitativeNeume]))
 
-    if note.vocalExpression ~= nil then
+    if note.vocalExpression then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.vocalExpression]))
     end
 
-    if note.measureBarRight ~= nil then
+    -- If the user did not specify an additional offset, latex+luacolor will position the marks correctly
+    if note.time and not note.timeOffset then
+            tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.time]))
+    end
+
+    if note.gorgon and not note.gorgonOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.gorgonDefaultColor, glyphNameToCodepointMap[note.gorgon]))
+    end
+
+    if note.fthora and not note.fthoraOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.fthoraDefaultColor, glyphNameToCodepointMap[note.fthora]))
+    end
+
+    if note.accidental and not note.accidentalOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.accidentalDefaultColor, glyphNameToCodepointMap[note.accidental]))
+    end
+
+    if note.ison and not note.isonOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.isonDefaultColor,glyphNameToCodepointMap[note.ison]))
+    end
+
+    if note.measureNumber and not note.measureNumberOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureNumberDefaultColor, glyphNameToCodepointMap[note.measureNumber]))
+    end
+
+    if note.measureBarRight then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarRight]))
     end
 
     tex.sprint("}");
 
-
-    if note.lyrics ~= nil then
+    if note.lyrics then
         local lyricPos = note.alignLeft and "l" or "c"
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - note.lyricsHorizontalOffset))    
         tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{12bp}{\\baselineskip}\\byzlyricfont{}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, note.lyrics))
@@ -126,11 +151,11 @@ function print_martyria(martyria, pageSetup)
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
     tex.sprint(string.format("{\\textcolor[HTML]{%s}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", pageSetup.martyriaDefaultColor))
-    if martyria.measureBarLeft ~= nil then
+    if martyria.measureBarLeft then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarLeft]))
     end
     tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]));
-    if martyria.measureBarRight ~= nil then
+    if martyria.measureBarRight then
         tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarRight]))
     end
     tex.sprint("}}");
@@ -167,7 +192,7 @@ function get_mark_offset(base, mark, extra_offset)
     local extra_x = 0
     local extra_y = 0
 
-    if extra_offset ~= nil then
+    if extra_offset then
         extra_x = extra_offset.x
         extra_y = extra_offset.y
     end
