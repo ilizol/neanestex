@@ -46,7 +46,7 @@ function print_note(note, pageSetup)
     tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", note.width))
 
     if note.measureBarLeft then
-        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarLeft]))
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureBarDefaultColor, glyphNameToCodepointMap[note.measureBarLeft]))
     end
 
     if note.vareia then
@@ -64,9 +64,29 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgon], offset.x))
     end
 
+    if note.gorgonSecondaryOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.gorgonSecondary, note.gorgonSecondaryOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgonSecondary], offset.x))
+    end
+
+    if note.gorgonTertiaryOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.gorgonTertiary, note.gorgonTertiaryOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgonTertiary], offset.x))
+    end
+
     if note.fthoraOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.fthora, note.fthoraOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.fthora], offset.x))
+    end
+
+    if note.fthoraSecondaryOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.fthoraSecondary, note.fthoraSecondaryOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.fthoraSecondary], offset.x))
+    end
+
+    if note.fthoraTertiaryOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.fthoraTertiary, note.fthoraTertiaryOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.fthoraTertiary], offset.x))
     end
 
     if note.accidentalOffset then
@@ -74,9 +94,29 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.accidentalDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.accidental], offset.x))
     end
 
+    if note.accidentalSecondaryOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.accidentalSecondary, note.accidentalSecondaryOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.accidentalDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.accidentalSecondary], offset.x))
+    end
+
+    if note.accidentalTertiaryOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.accidentalTertiary, note.accidentalTertiaryOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.accidentalDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.accidentalTertiary], offset.x))
+    end
+
     if note.isonOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.ison, note.isonOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.isonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.ison], offset.x))
+    end
+
+    if note.noteIndicatorOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.noteIndicator, note.noteIndicatorOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.noteIndicatorDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.noteIndicator], offset.x))
+    end
+
+    if note.koronisOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.koronis, note.koronisOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.koronisDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.koronis], offset.x))
     end
 
     if note.measureNumberOffset then
@@ -84,6 +124,7 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.measureNumberDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.measureNumber], offset.x))
     end
 
+    -- Print the main neume
     tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.quantitativeNeume]))
 
     if note.vocalExpression then
@@ -99,16 +140,44 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.gorgonDefaultColor, glyphNameToCodepointMap[note.gorgon]))
     end
 
+    if note.gorgonSecondary and not note.gorgonSecondaryOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.gorgonDefaultColor, glyphNameToCodepointMap[note.gorgonSecondary]))
+    end
+
+    if note.gorgonTertiary and not note.gorgonTertiaryOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.gorgonDefaultColor, glyphNameToCodepointMap[note.gorgonTertiary]))
+    end
+
     if note.fthora and not note.fthoraOffset then
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.fthoraDefaultColor, glyphNameToCodepointMap[note.fthora]))
+    end
+
+    if note.fthoraSecondary and not note.fthoraSecondaryOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.fthoraDefaultColor, glyphNameToCodepointMap[note.fthoraSecondary]))
+    end
+
+    if note.fthoraTertiary and not note.fthoraTertiaryOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.fthoraDefaultColor, glyphNameToCodepointMap[note.fthoraTertiary]))
     end
 
     if note.accidental and not note.accidentalOffset then
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.accidentalDefaultColor, glyphNameToCodepointMap[note.accidental]))
     end
 
+    if note.accidentalSecondary and not note.accidentalSecondaryOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.accidentalDefaultColor, glyphNameToCodepointMap[note.accidentalSecondary]))
+    end
+
+    if note.accidentalTertiary and not note.accidentalTertiaryOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.accidentalDefaultColor, glyphNameToCodepointMap[note.accidentalTertiary]))
+    end
+
     if note.ison and not note.isonOffset then
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.isonDefaultColor,glyphNameToCodepointMap[note.ison]))
+    end
+
+    if note.noteIndicator and not note.noteIndicatorOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.noteIndicatorDefaultColor,glyphNameToCodepointMap[note.noteIndicator]))
     end
 
     if note.measureNumber and not note.measureNumberOffset then
@@ -116,7 +185,7 @@ function print_note(note, pageSetup)
     end
 
     if note.measureBarRight then
-        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.measureBarRight]))
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureBarDefaultColor, glyphNameToCodepointMap[note.measureBarRight]))
     end
 
     tex.sprint("}");
@@ -151,13 +220,17 @@ function print_martyria(martyria, pageSetup)
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
     tex.sprint(string.format("{\\textcolor[HTML]{%s}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", pageSetup.martyriaDefaultColor))
+    
     if martyria.measureBarLeft then
-        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarLeft]))
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureBarDefaultColor, glyphNameToCodepointMap[martyria.measureBarLeft]))
     end
+    
     tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]));
+    
     if martyria.measureBarRight then
-        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[martyria.measureBarRight]))
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureBarDefaultColor, glyphNameToCodepointMap[martyria.measureBarRight]))
     end
+
     tex.sprint("}}");
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
