@@ -69,11 +69,6 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgonSecondary], offset.x))
     end
 
-    if note.gorgonTertiaryOffset then
-        local offset = get_mark_offset(note.quantitativeNeume, note.gorgonTertiary, note.gorgonTertiaryOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.gorgonDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.gorgonTertiary], offset.x))
-    end
-
     if note.fthoraOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.fthora, note.fthoraOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.fthoraDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.fthora], offset.x))
@@ -142,10 +137,6 @@ function print_note(note, pageSetup)
 
     if note.gorgonSecondary and not note.gorgonSecondaryOffset then
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.gorgonDefaultColor, glyphNameToCodepointMap[note.gorgonSecondary]))
-    end
-
-    if note.gorgonTertiary and not note.gorgonTertiaryOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.gorgonDefaultColor, glyphNameToCodepointMap[note.gorgonTertiary]))
     end
 
     if note.fthora and not note.fthoraOffset then
