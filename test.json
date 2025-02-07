@@ -7,11 +7,20 @@
     "lyricsMelismaSpacing": 1.8,
     "lyricsMelismaThickness": 0.75,
     "accidentalDefaultColor": "800000",
+    "dropCapDefaultColor": "800000",
     "fthoraDefaultColor": "800000",
     "gorgonDefaultColor": "800000",
+    "heteronDefaultColor": "800000",
     "isonDefaultColor": "800000",
+    "koronisDefaultColor": "800000",
+    "lyricsDefaultColor": "000000",
     "martyriaDefaultColor": "800000",
-    "measureNumberDefaultColor": "000000"
+    "measureBarDefaultColor": "800000",
+    "measureNumberDefaultColor": "000000",
+    "modeKeyDefaultColor": "800000",
+    "neumeDefaultColor": "000000",
+    "noteIndicatorDefaultColor": "800000",
+    "tempoDefaultColor": "800000"
   },
   "lines": [
     {
