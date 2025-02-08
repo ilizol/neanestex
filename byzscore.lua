@@ -251,12 +251,32 @@ function print_martyria(martyria, pageSetup)
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
     tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
     
-    if martyria.measureBarLeft then
+    if martyria.measureBarLeft and not string.match(martyria.measureBarLeft, 'Above$') then
         tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarLeft]))
+    end
+
+    if martyria.tempoLeft then
+        tex.sprint(string.format("\\textcolor{byzcolortempo}{\\char\"%s}", glyphNameToCodepointMap[martyria.tempoLeft]))
     end
     
     tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]));
     
+    if martyria.fthora then
+        tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\char\"%s}", glyphNameToCodepointMap[martyria.fthora]))
+    end
+
+    if martyria.tempo then
+        tex.sprint(string.format("\\textcolor{byzcolortempo}{\\char\"%s}", glyphNameToCodepointMap[martyria.tempo]))
+    end
+
+    if martyria.measureBarLeft and string.match(martyria.measureBarLeft, 'Above$') then
+        tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarLeft]))
+    end
+
+    if martyria.tempoRight then
+        tex.sprint(string.format("\\textcolor{byzcolortempo}{\\char\"%s}", glyphNameToCodepointMap[martyria.tempoRight]))
+    end
+
     if martyria.measureBarRight then
         tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarRight]))
     end
