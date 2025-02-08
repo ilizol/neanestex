@@ -26,21 +26,21 @@ function parse_notes(filename)
     tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
     
-    tex.sprint(string.format("\\def\\byzcoloraccidental{%s}", data.pageSetup.defaultColors.accidental))
-    tex.sprint(string.format("\\def\\byzcolordropcap{%s}", data.pageSetup.defaultColors.dropCap))
-    tex.sprint(string.format("\\def\\byzcolorfthora{%s}", data.pageSetup.defaultColors.fthora))
-    tex.sprint(string.format("\\def\\byzcolorgorgon{%s}", data.pageSetup.defaultColors.gorgon))
-    tex.sprint(string.format("\\def\\byzcolorheteron{%s}", data.pageSetup.defaultColors.heteron))
-    tex.sprint(string.format("\\def\\byzcolorison{%s}", data.pageSetup.defaultColors.ison))
-    tex.sprint(string.format("\\def\\byzcolorkoronis{%s}", data.pageSetup.defaultColors.koronis))
-    tex.sprint(string.format("\\def\\byzcolorlyrics{%s}", data.pageSetup.defaultColors.lyrics))
-    tex.sprint(string.format("\\def\\byzcolormartyria{%s}", data.pageSetup.defaultColors.martyria))
-    tex.sprint(string.format("\\def\\byzcolormeasurebar{%s}", data.pageSetup.defaultColors.measureBar))
-    tex.sprint(string.format("\\def\\byzcolormeasurenumber{%s}", data.pageSetup.defaultColors.measureNumber))
-    tex.sprint(string.format("\\def\\byzcolormodekey{%s}", data.pageSetup.defaultColors.modeKey))
-    tex.sprint(string.format("\\def\\byzcolorneume{%s}", data.pageSetup.defaultColors.neume))
-    tex.sprint(string.format("\\def\\byzcolornoteindicator{%s}", data.pageSetup.defaultColors.noteIndicator))
-    tex.sprint(string.format("\\def\\byzcolortempo{%s}", data.pageSetup.defaultColors.tempo))
+    tex.sprint(string.format("\\definecolor{byzcoloraccidental}{HTML}{%s}", data.pageSetup.defaultColors.accidental))
+    tex.sprint(string.format("\\definecolor{byzcolordropcap}{HTML}{%s}", data.pageSetup.defaultColors.dropCap))
+    tex.sprint(string.format("\\definecolor{byzcolorfthora}{HTML}{%s}", data.pageSetup.defaultColors.fthora))
+    tex.sprint(string.format("\\definecolor{byzcolorgorgon}{HTML}{%s}", data.pageSetup.defaultColors.gorgon))
+    tex.sprint(string.format("\\definecolor{byzcolorheteron}{HTML}{%s}", data.pageSetup.defaultColors.heteron))
+    tex.sprint(string.format("\\definecolor{byzcolorison}{HTML}{%s}", data.pageSetup.defaultColors.ison))
+    tex.sprint(string.format("\\definecolor{byzcolorkoronis}{HTML}{%s}", data.pageSetup.defaultColors.koronis))
+    tex.sprint(string.format("\\definecolor{byzcolorlyrics}{HTML}{%s}", data.pageSetup.defaultColors.lyrics))
+    tex.sprint(string.format("\\definecolor{byzcolormartyria}{HTML}{%s}", data.pageSetup.defaultColors.martyria))
+    tex.sprint(string.format("\\definecolor{byzcolormeasurebar}{HTML}{%s}", data.pageSetup.defaultColors.measureBar))
+    tex.sprint(string.format("\\definecolor{byzcolormeasurenumber}{HTML}{%s}", data.pageSetup.defaultColors.measureNumber))
+    tex.sprint(string.format("\\definecolor{byzcolormodekey}{HTML}{%s}", data.pageSetup.defaultColors.modeKey))
+    tex.sprint(string.format("\\definecolor{byzcolorneume}{HTML}{%s}", data.pageSetup.defaultColors.neume))
+    tex.sprint(string.format("\\definecolor{byzcolornoteindicator}{HTML}{%s}", data.pageSetup.defaultColors.noteIndicator))
+    tex.sprint(string.format("\\definecolor{byzcolortempo}{HTML}{%s}", data.pageSetup.defaultColors.tempo))
 
     for _, line in ipairs(data.lines) do
         if #line.elements > 0 then 
@@ -67,7 +67,7 @@ function print_note(note, pageSetup)
     tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", note.width))
 
     if note.measureBarLeft then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[note.measureBarLeft]))
+        tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[note.measureBarLeft]))
     end
 
     if note.vareia then
@@ -82,62 +82,62 @@ function print_note(note, pageSetup)
 
     if note.gorgonOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.gorgon, note.gorgonOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorgorgon}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.gorgon], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorgorgon}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.gorgon], offset.x))
     end
 
     if note.gorgonSecondaryOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.gorgonSecondary, note.gorgonSecondaryOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorgorgon}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.gorgonSecondary], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorgorgon}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.gorgonSecondary], offset.x))
     end
 
     if note.fthoraOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.fthora, note.fthoraOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorfthora}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.fthora], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorfthora}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.fthora], offset.x))
     end
 
     if note.fthoraSecondaryOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.fthoraSecondary, note.fthoraSecondaryOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorfthora}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.fthoraSecondary], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorfthora}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.fthoraSecondary], offset.x))
     end
 
     if note.fthoraTertiaryOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.fthoraTertiary, note.fthoraTertiaryOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorfthora}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.fthoraTertiary], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorfthora}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.fthoraTertiary], offset.x))
     end
 
     if note.accidentalOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.accidental, note.accidentalOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcoloraccidental}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.accidental], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcoloraccidental}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.accidental], offset.x))
     end
 
     if note.accidentalSecondaryOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.accidentalSecondary, note.accidentalSecondaryOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcoloraccidental}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.accidentalSecondary], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcoloraccidental}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.accidentalSecondary], offset.x))
     end
 
     if note.accidentalTertiaryOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.accidentalTertiary, note.accidentalTertiaryOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcoloraccidental}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.accidentalTertiary], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcoloraccidental}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.accidentalTertiary], offset.x))
     end
 
     if note.isonOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.ison, note.isonOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorison}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.ison], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorison}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.ison], offset.x))
     end
 
     if note.noteIndicatorOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.noteIndicator, note.noteIndicatorOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolornoteindicator}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.noteIndicator], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolornoteindicator}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.noteIndicator], offset.x))
     end
 
     if note.koronisOffset then
         local offset = get_mark_offset(note.quantitativeNeume, 'koronis', note.koronisOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorkoronis}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap['koronis'], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolorkoronis}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap['koronis'], offset.x))
     end
 
     if note.measureNumberOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.measureNumber, note.measureNumberOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurenumber}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.measureNumber], offset.x))
+        tex.sprint(string.format("\\textcolor{byzcolormeasurenumber}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.measureNumber], offset.x))
     end
 
     if note.tieOffset then
@@ -158,51 +158,51 @@ function print_note(note, pageSetup)
     end
 
     if note.gorgon and not note.gorgonOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorgorgon}{\\char\"%s}", glyphNameToCodepointMap[note.gorgon]))
+        tex.sprint(string.format("\\textcolor{byzcolorgorgon}{\\char\"%s}", glyphNameToCodepointMap[note.gorgon]))
     end
 
     if note.gorgonSecondary and not note.gorgonSecondaryOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorgorgon}{\\char\"%s}", glyphNameToCodepointMap[note.gorgonSecondary]))
+        tex.sprint(string.format("\\textcolor{byzcolorgorgon}{\\char\"%s}", glyphNameToCodepointMap[note.gorgonSecondary]))
     end
 
     if note.fthora and not note.fthoraOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorfthora}{\\char\"%s}", glyphNameToCodepointMap[note.fthora]))
+        tex.sprint(string.format("\\textcolor{byzcolorfthora}{\\char\"%s}", glyphNameToCodepointMap[note.fthora]))
     end
 
     if note.fthoraSecondary and not note.fthoraSecondaryOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorfthora}{\\char\"%s}", glyphNameToCodepointMap[note.fthoraSecondary]))
+        tex.sprint(string.format("\\textcolor{byzcolorfthora}{\\char\"%s}", glyphNameToCodepointMap[note.fthoraSecondary]))
     end
 
     if note.fthoraTertiary and not note.fthoraTertiaryOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorfthora}{\\char\"%s}", glyphNameToCodepointMap[note.fthoraTertiary]))
+        tex.sprint(string.format("\\textcolor{byzcolorfthora}{\\char\"%s}", glyphNameToCodepointMap[note.fthoraTertiary]))
     end
 
     if note.accidental and not note.accidentalOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcoloraccidental}{\\char\"%s}", glyphNameToCodepointMap[note.accidental]))
+        tex.sprint(string.format("\\textcolor{byzcoloraccidental}{\\char\"%s}", glyphNameToCodepointMap[note.accidental]))
     end
 
     if note.accidentalSecondary and not note.accidentalSecondaryOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcoloraccidental}{\\char\"%s}", glyphNameToCodepointMap[note.accidentalSecondary]))
+        tex.sprint(string.format("\\textcolor{byzcoloraccidental}{\\char\"%s}", glyphNameToCodepointMap[note.accidentalSecondary]))
     end
 
     if note.accidentalTertiary and not note.accidentalTertiaryOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcoloraccidental}{\\char\"%s}", glyphNameToCodepointMap[note.accidentalTertiary]))
+        tex.sprint(string.format("\\textcolor{byzcoloraccidental}{\\char\"%s}", glyphNameToCodepointMap[note.accidentalTertiary]))
     end
 
     if note.ison and not note.isonOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorison}{\\char\"%s}",glyphNameToCodepointMap[note.ison]))
+        tex.sprint(string.format("\\textcolor{byzcolorison}{\\char\"%s}",glyphNameToCodepointMap[note.ison]))
     end
 
     if note.noteIndicator and not note.noteIndicatorOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolornoteindicator}{\\char\"%s}",glyphNameToCodepointMap[note.noteIndicator]))
+        tex.sprint(string.format("\\textcolor{byzcolornoteindicator}{\\char\"%s}",glyphNameToCodepointMap[note.noteIndicator]))
     end
 
     if note.koronis and not note.koronisOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolorkoronis}{\\char\"%s}",glyphNameToCodepointMap['koronis']))
+        tex.sprint(string.format("\\textcolor{byzcolorkoronis}{\\char\"%s}",glyphNameToCodepointMap['koronis']))
     end
 
     if note.measureNumber and not note.measureNumberOffset then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurenumber}{\\char\"%s}", glyphNameToCodepointMap[note.measureNumber]))
+        tex.sprint(string.format("\\textcolor{byzcolormeasurenumber}{\\char\"%s}", glyphNameToCodepointMap[note.measureNumber]))
     end
 
     if note.tie and not note.tieOffset then
@@ -211,7 +211,7 @@ function print_note(note, pageSetup)
 
     -- Right measure bar is last
     if note.measureBarRight then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[note.measureBarRight]))
+        tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[note.measureBarRight]))
     end
 
     -- close \makebox{}
@@ -247,16 +247,16 @@ end
 function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
-    tex.sprint(string.format("{\\textcolor[HTML]{\\byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
+    tex.sprint(string.format("{\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
     
     if martyria.measureBarLeft then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarLeft]))
+        tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarLeft]))
     end
     
     tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]));
     
     if martyria.measureBarRight then
-        tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarRight]))
+        tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarRight]))
     end
 
     tex.sprint("}}");
