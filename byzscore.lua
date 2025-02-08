@@ -110,13 +110,18 @@ function print_note(note, pageSetup)
     end
 
     if note.koronisOffset then
-        local offset = get_mark_offset(note.quantitativeNeume, note.koronis, note.koronisOffset)
-        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.koronisDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.koronis], offset.x))
+        local offset = get_mark_offset(note.quantitativeNeume, 'koronis', note.koronisOffset)
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.koronisDefaultColor, offset.x, offset.y, glyphNameToCodepointMap['koronis'], offset.x))
     end
 
     if note.measureNumberOffset then
         local offset = get_mark_offset(note.quantitativeNeume, note.measureNumber, note.measureNumberOffset)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}}\\hspace{-%fem}", pageSetup.measureNumberDefaultColor, offset.x, offset.y, glyphNameToCodepointMap[note.measureNumber], offset.x))
+    end
+
+    if note.tieOffset then
+        local offset = get_mark_offset(note.quantitativeNeume, note.tie, note.tieOffset)
+        tex.sprint(string.format("\\hspace{%fem}\\raisebox{-%fem}{\\char\"%s}\\hspace{-%fem}", offset.x, offset.y, glyphNameToCodepointMap[note.tie], offset.x))
     end
 
     -- Print the main neume
@@ -171,10 +176,19 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.noteIndicatorDefaultColor,glyphNameToCodepointMap[note.noteIndicator]))
     end
 
+    if note.koronis and not note.koronisOffset then
+        tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.noteIndicatorDefaultColor,glyphNameToCodepointMap['koronis']))
+    end
+
     if note.measureNumber and not note.measureNumberOffset then
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureNumberDefaultColor, glyphNameToCodepointMap[note.measureNumber]))
     end
 
+    if note.tie and not note.tieOffset then
+        tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[note.tie]))
+    end
+
+    -- Right measure bar is last
     if note.measureBarRight then
         tex.sprint(string.format("\\textcolor[HTML]{%s}{\\char\"%s}", pageSetup.measureBarDefaultColor, glyphNameToCodepointMap[note.measureBarRight]))
     end
