@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "pageSetup": {
     "lineHeight": 54.720000000000006,
+    "dropCapDefaultFontSize": 60,
     "neumeDefaultFontSize": 20,
     "lyricsDefaultFontSize": 12,
     "lyricsVerticalOffset": -18.6,

@@ -24,6 +24,7 @@ function parse_notes(filename)
 
     tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
+    tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.dropCapDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
     
     tex.sprint(string.format("\\definecolor{byzcoloraccidental}{HTML}{%s}", data.pageSetup.defaultColors.accidental))
@@ -266,9 +267,16 @@ function print_martyria(martyria, pageSetup)
 end
 
 function print_drop_cap(dropCap, pageSetup) 
+    local font_size = dropCap.fontSize and string.format("%fbp", dropCap.fontSize) or '\\byzdropcapsize' 
+    local color = dropCap.color and string.format('\\textcolor[HTML]{%s}', dropCap.color) or '\\textcolor{byzcolordropcap}' 
+    local default_weight = pageSetup.dropCapDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.dropCapDefaultFontWeight) or ''
+    local weight = dropCap.fontWeight and string.format('\\addfontfeatures{Weight=%s}', dropCap.fontWeight) or default_weight
+    local style = dropCap.fontStyle and dropCap.fontStyle or pageSetup.dropCapDefaultFontStyle
+    local content = style == 'italic' and string.format('\\textit{%s}', dropCap.content) or dropCap.content
+
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
-    tex.sprint(string.format("\\raisebox{%fbp}{{\\textcolor[HTML]{%s}{\\fontsize{%fbp}{\\baselineskip}\\byzdropcapfont{}%s}}}", pageSetup.lyricsVerticalOffset, dropCap.color, dropCap.fontSize, dropCap.content))    
+    tex.sprint(string.format("\\raisebox{%fbp}{{%s{\\fontsize{%s}{\\baselineskip}\\byzdropcapfont{}{%s%s}}}}", pageSetup.lyricsVerticalOffset, color, font_size, weight, content))    
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
