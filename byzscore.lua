@@ -19,25 +19,28 @@ function parse_notes(filename)
         glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
     end
 
-    tex.sprint(string.format("{\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
-    tex.sprint(string.format("{\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
-    tex.sprint(string.format("{\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
+    -- open a new section so that our variables do not persist forever
+    tex.sprint('{')
+
+    tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
+    tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
+    tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
     
-    tex.sprint(string.format("{\\def\\byzcoloraccidental{%s}", data.pageSetup.defaultColors.accidental))
-    tex.sprint(string.format("{\\def\\byzcolordropcap{%s}", data.pageSetup.defaultColors.dropCap))
-    tex.sprint(string.format("{\\def\\byzcolorfthora{%s}", data.pageSetup.defaultColors.fthora))
-    tex.sprint(string.format("{\\def\\byzcolorgorgon{%s}", data.pageSetup.defaultColors.gorgon))
-    tex.sprint(string.format("{\\def\\byzcolorheteron{%s}", data.pageSetup.defaultColors.heteron))
-    tex.sprint(string.format("{\\def\\byzcolorison{%s}", data.pageSetup.defaultColors.ison))
-    tex.sprint(string.format("{\\def\\byzcolorkoronis{%s}", data.pageSetup.defaultColors.koronis))
-    tex.sprint(string.format("{\\def\\byzcolorlyrics{%s}", data.pageSetup.defaultColors.lyrics))
-    tex.sprint(string.format("{\\def\\byzcolormartyria{%s}", data.pageSetup.defaultColors.martyria))
-    tex.sprint(string.format("{\\def\\byzcolormeasurebar{%s}", data.pageSetup.defaultColors.measureBar))
-    tex.sprint(string.format("{\\def\\byzcolormeasurenumber{%s}", data.pageSetup.defaultColors.measureNumber))
-    tex.sprint(string.format("{\\def\\byzcolormodekey{%s}", data.pageSetup.defaultColors.modeKey))
-    tex.sprint(string.format("{\\def\\byzcolorneume{%s}", data.pageSetup.defaultColors.neume))
-    tex.sprint(string.format("{\\def\\byzcolornoteindicator{%s}", data.pageSetup.defaultColors.noteIndicator))
-    tex.sprint(string.format("{\\def\\byzcolortempo{%s}", data.pageSetup.defaultColors.tempo))
+    tex.sprint(string.format("\\def\\byzcoloraccidental{%s}", data.pageSetup.defaultColors.accidental))
+    tex.sprint(string.format("\\def\\byzcolordropcap{%s}", data.pageSetup.defaultColors.dropCap))
+    tex.sprint(string.format("\\def\\byzcolorfthora{%s}", data.pageSetup.defaultColors.fthora))
+    tex.sprint(string.format("\\def\\byzcolorgorgon{%s}", data.pageSetup.defaultColors.gorgon))
+    tex.sprint(string.format("\\def\\byzcolorheteron{%s}", data.pageSetup.defaultColors.heteron))
+    tex.sprint(string.format("\\def\\byzcolorison{%s}", data.pageSetup.defaultColors.ison))
+    tex.sprint(string.format("\\def\\byzcolorkoronis{%s}", data.pageSetup.defaultColors.koronis))
+    tex.sprint(string.format("\\def\\byzcolorlyrics{%s}", data.pageSetup.defaultColors.lyrics))
+    tex.sprint(string.format("\\def\\byzcolormartyria{%s}", data.pageSetup.defaultColors.martyria))
+    tex.sprint(string.format("\\def\\byzcolormeasurebar{%s}", data.pageSetup.defaultColors.measureBar))
+    tex.sprint(string.format("\\def\\byzcolormeasurenumber{%s}", data.pageSetup.defaultColors.measureNumber))
+    tex.sprint(string.format("\\def\\byzcolormodekey{%s}", data.pageSetup.defaultColors.modeKey))
+    tex.sprint(string.format("\\def\\byzcolorneume{%s}", data.pageSetup.defaultColors.neume))
+    tex.sprint(string.format("\\def\\byzcolornoteindicator{%s}", data.pageSetup.defaultColors.noteIndicator))
+    tex.sprint(string.format("\\def\\byzcolortempo{%s}", data.pageSetup.defaultColors.tempo))
 
     for _, line in ipairs(data.lines) do
         if #line.elements > 0 then 
@@ -53,7 +56,9 @@ function parse_notes(filename)
         end
     end
 
-    tex.sprint("\\par}")
+    tex.sprint("\\par")
+    -- close the section
+    tex.sprint("}")
 end
 
 function print_note(note, pageSetup)
@@ -209,6 +214,7 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\textcolor[HTML]{\\byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[note.measureBarRight]))
     end
 
+    -- close \makebox{}
     tex.sprint("}");
 
     if note.lyrics then
@@ -227,13 +233,14 @@ function print_note(note, pageSetup)
             end
         end
 
+        -- close \raisebox{\makebox{}}
         tex.sprint("}}")
-
     end
 
     tex.sprint(string.format("\\hspace{-%fbp}", note.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -note.x)) 
 
+    -- close \mbox{}
     tex.sprint("}")
 end
 
