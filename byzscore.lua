@@ -43,16 +43,17 @@ function parse_notes(filename)
     tex.sprint(string.format("\\definecolor{byzcolornoteindicator}{HTML}{%s}", data.pageSetup.defaultColors.noteIndicator))
     tex.sprint(string.format("\\definecolor{byzcolortempo}{HTML}{%s}", data.pageSetup.defaultColors.tempo))
 
-    for _, line in ipairs(data.lines) do
+    for index, line in ipairs(data.lines) do
         if #line.elements > 0 then 
             tex.sprint("\\noindent")
         end
         for _, element in ipairs(line.elements) do
             if element.type == 'note' then print_note(element, data.pageSetup) end
             if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
+            if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
             if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
         end
-        if #line.elements > 0 then 
+        if #line.elements > 0 and index < #data.lines then 
             tex.sprint("\\newline")
         end
     end
@@ -248,7 +249,7 @@ end
 function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
-    tex.sprint(string.format("{\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
+    tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
     
     if martyria.measureBarLeft then
         tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarLeft]))
@@ -260,9 +261,22 @@ function print_martyria(martyria, pageSetup)
         tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarRight]))
     end
 
-    tex.sprint("}}");
+    tex.sprint("}");
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
+    tex.sprint("}")
+end
+
+function print_tempo(tempo, pageSetup) 
+    tex.sprint("\\mbox{")
+    tex.sprint(string.format("\\hspace{%fbp}", tempo.x)) 
+    tex.sprint(string.format("\\textcolor{byzcolortempo}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
+        
+    tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[tempo.neume]));
+    
+    tex.sprint("}");
+    tex.sprint(string.format("\\hspace{-%fbp}", tempo.width))         
+    tex.sprint(string.format("\\hspace{%fbp}", -tempo.x)) 
     tex.sprint("}")
 end
 
