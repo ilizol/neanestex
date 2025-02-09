@@ -19,6 +19,10 @@ function parse_notes(filename)
         glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
     end
 
+    for glyph, data in pairs(font_metadata.optionalGlyphs) do
+        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
+    end
+
     -- open a new section so that our variables do not persist forever
     tex.sprint('{')
 
