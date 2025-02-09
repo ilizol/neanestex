@@ -221,8 +221,16 @@ function print_note(note, pageSetup)
 
     if note.lyrics then
         local lyricPos = note.alignLeft and "l" or "c"
+        local fontSize = note.lyricsFontSize and string.format('%fbp', note.lyricsFontSize) or '\\byzlyricsize'
+        local color = note.lyricsColor and string.format('\\textcolor[HTML]{%s}', note.lyricsColor) or '\\textcolor{byzcolorlyrics}' 
+        local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
+        local weight = note.lyricsFontWeight and string.format('\\addfontfeatures{Weight=%s}', note.lyricsFontWeight) or default_weight
+        local style = note.lyricsFontStyle and note.lyricsFontStyle or pageSetup.lyricsDefaultFontStyle
+        local lyrics = style == 'italic' and string.format('\\textit{%s}', note.lyrics) or note.lyrics
+        lyrics = note.lyricsFontFamily and string.format("{\\fontspec{%s}%s%s}", note.lyricsFontFamily, weight, lyrics) or string.format('\\byzlyricfont{}{%s%s}', weight, lyrics)
+
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - note.lyricsHorizontalOffset))    
-        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{12bp}{\\baselineskip}\\byzlyricfont{}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, note.lyrics))
+        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, fontSize, lyrics))
 
         -- Melismas
         if note.melismaWidth > 0 then
@@ -307,10 +315,11 @@ function print_drop_cap(dropCap, pageSetup)
     local weight = dropCap.fontWeight and string.format('\\addfontfeatures{Weight=%s}', dropCap.fontWeight) or default_weight
     local style = dropCap.fontStyle and dropCap.fontStyle or pageSetup.dropCapDefaultFontStyle
     local content = style == 'italic' and string.format('\\textit{%s}', dropCap.content) or dropCap.content
+    content = dropCap.fontFamily and string.format("{\\fontspec{%s}%s%s}", dropCap.fontFamily, weight, content) or string.format('\\byzdropcapfont{}{%s%s}', weight, content)
 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
-    tex.sprint(string.format("\\raisebox{%fbp}{{%s{\\fontsize{%s}{\\baselineskip}\\byzdropcapfont{}{%s%s}}}}", pageSetup.lyricsVerticalOffset, color, font_size, weight, content))    
+    tex.sprint(string.format("\\raisebox{%fbp}{{%s{\\fontsize{%s}{\\baselineskip}%s}}}", pageSetup.lyricsVerticalOffset, color, font_size, content))    
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
