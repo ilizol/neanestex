@@ -52,6 +52,7 @@ function parse_notes(filename)
             if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
             if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
             if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
+            if element.type == 'modekey' then print_mode_key(element, data.pageSetup) end
         end
         if #line.elements > 0 and index < #data.lines then 
             tex.sprint("\\newline")
@@ -217,7 +218,7 @@ function print_note(note, pageSetup)
     end
 
     -- close \makebox{}
-    tex.sprint("}");
+    tex.sprint("}")
 
     if note.lyrics then
         local lyricPos = note.alignLeft and "l" or "c"
@@ -281,7 +282,7 @@ function print_martyria(martyria, pageSetup)
         tex.sprint(string.format("\\textcolor{byzcolortempo}{\\char\"%s}", glyphNameToCodepointMap[martyria.tempoLeft]))
     end
     
-    tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]));
+    tex.sprint(string.format("\\char\"%s\\char\"%s", glyphNameToCodepointMap[martyria.note], glyphNameToCodepointMap[martyria.rootSign]))
     
     if martyria.fthora then
         tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\char\"%s}", glyphNameToCodepointMap[martyria.fthora]))
@@ -303,7 +304,7 @@ function print_martyria(martyria, pageSetup)
         tex.sprint(string.format("\\textcolor{byzcolormeasurebar}{\\char\"%s}", glyphNameToCodepointMap[martyria.measureBarRight]))
     end
 
-    tex.sprint("}");
+    tex.sprint("}")
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
     tex.sprint("}")
@@ -314,11 +315,13 @@ function print_tempo(tempo, pageSetup)
     tex.sprint(string.format("\\hspace{%fbp}", tempo.x)) 
     tex.sprint(string.format("\\textcolor{byzcolortempo}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
         
-    tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[tempo.neume]));
+    tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[tempo.neume]))
     
-    tex.sprint("}");
+    -- end \textcolor
+    tex.sprint("}")
     tex.sprint(string.format("\\hspace{-%fbp}", tempo.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -tempo.x)) 
+    -- end \mbox
     tex.sprint("}")
 end
 
@@ -339,6 +342,34 @@ function print_drop_cap(dropCap, pageSetup)
     tex.sprint("}")
 end
 
+function print_mode_key(modeKey, pageSetup)
+    tex.sprint("\\mbox{")
+    tex.sprint(string.format("\\hspace{%fbp}", modeKey.x)) 
+    tex.sprint(string.format("\\makebox[%fbp][%s]{", modeKey.width, modeKey.alignment))
+    tex.sprint(string.format("\\textcolor{byzcolormodekey}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
+        
+    tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap['modeWordEchos']))
+    if modeKey.isPlagal then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap['modePlagal'])) end
+    if modeKey.isVarys then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap['modeWordVarys'])) end
+    tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.martyria]))
+    if modeKey.note then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.note])) end
+    if modeKey.fthoraAboveNote then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.fthoraAboveNote])) end
+    if modeKey.quantitativeNeumeAboveNote then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.quantitativeNeumeAboveNote])) end
+    if modeKey.note2 then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.note2])) end
+    if modeKey.fthoraAboveNote2 then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.fthoraAboveNote2])) end
+    if modeKey.quantitativeNeumeAboveNote2 then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.quantitativeNeumeAboveNote2])) end
+    if modeKey.quantitativeNeumeRight then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.quantitativeNeumeRight])) end
+    if modeKey.fthoraAboveQuantitativeNeumeRight then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.fthoraAboveQuantitativeNeumeRight])) end
+    if modeKey.tempo and modeKey.tempoAlignRight then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.tempo])) end
+    
+    -- end \textcolor and \makebox
+    tex.sprint("}}")
+    tex.sprint(string.format("\\hspace{-%fbp}", modeKey.width))         
+    tex.sprint(string.format("\\hspace{%fbp}", -modeKey.x)) 
+    -- end \mbox
+    tex.sprint("}")
+end
+
 function get_mark_offset(base, mark, extra_offset)
     local mark_anchor_name = find_mark_anchor_name(base, mark)
 
@@ -349,11 +380,11 @@ function get_mark_offset(base, mark, extra_offset)
 
     local mark_anchor = font_metadata.glyphsWithAnchors[mark][
       mark_anchor_name
-    ];
+    ]
 
     local base_anchor = font_metadata.glyphsWithAnchors[base][
       mark_anchor_name
-    ];
+    ]
 
     local extra_x = 0
     local extra_y = 0
