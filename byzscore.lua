@@ -27,6 +27,7 @@ function parse_notes(filename)
     tex.sprint('{')
 
     tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
+    tex.sprint(string.format("\\setlength{\\byzmodekeysize}{%fbp}", data.pageSetup.modeKeyDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.dropCapDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
@@ -347,10 +348,13 @@ function print_drop_cap(dropCap, pageSetup)
 end
 
 function print_mode_key(modeKey, pageSetup)
+    local font_size = modeKey.fontSize and string.format("%fbp", modeKey.fontSize) or '\\byzmodekeysize' 
+    local color = modeKey.color and string.format('\\textcolor[HTML]{%s}', modeKey.color) or '\\textcolor{byzcolormodekey}' 
+    
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", modeKey.x)) 
     tex.sprint(string.format("\\makebox[%fbp][%s]{", modeKey.width, modeKey.alignment))
-    tex.sprint(string.format("\\textcolor{byzcolormodekey}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
+    tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}\\byzneumefont", color, font_size))
         
     tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap['modeWordEchos']))
     if modeKey.isPlagal then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap['modePlagal'])) end
