@@ -233,7 +233,7 @@ function print_note(note, pageSetup)
         tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, fontSize, lyrics))
 
         -- Melismas
-        if note.melismaWidth > 0 then
+        if note.melismaWidth and note.melismaWidth > 0 then
             if note.isHyphen then
                 for _, hyphenOffset in ipairs(note.hyphenOffsets) do
                     tex.sprint(string.format("\\hspace{%fbp}\\rlap{-}\\hspace{-%fbp}", hyphenOffset, hyphenOffset))
@@ -241,6 +241,20 @@ function print_note(note, pageSetup)
             else
                 tex.sprint(string.format("\\hspace{%fbp}\\rule{%fbp}{%fbp}\\hspace{-%fbp}", pageSetup.lyricsMelismaSpacing, note.melismaWidth - pageSetup.lyricsMelismaSpacing, pageSetup.lyricsMelismaThickness, note.melismaWidth))
             end
+        end
+
+        -- close \raisebox{\makebox{}}
+        tex.sprint("}}")
+    elseif note.isFullMelisma then
+        tex.sprint(string.format("\\hspace{-%fbp}", note.width))    
+        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][l]{", pageSetup.lyricsVerticalOffset, note.width))
+
+        if note.isHyphen then
+            for _, hyphenOffset in ipairs(note.hyphenOffsets) do
+                tex.sprint(string.format("\\hspace{%fbp}\\rlap{-}\\hspace{-%fbp}", hyphenOffset, hyphenOffset))
+            end
+        else
+            tex.sprint(string.format("\\rule{%fbp}{%fbp}\\hspace{-%fbp}", note.melismaWidth, pageSetup.lyricsMelismaThickness, note.melismaWidth))
         end
 
         -- close \raisebox{\makebox{}}
