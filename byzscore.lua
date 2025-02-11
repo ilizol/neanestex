@@ -373,11 +373,34 @@ function print_mode_key(modeKey, pageSetup)
     if modeKey.quantitativeNeumeAboveNote2 then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.quantitativeNeumeAboveNote2])) end
     if modeKey.quantitativeNeumeRight then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.quantitativeNeumeRight])) end
     if modeKey.fthoraAboveQuantitativeNeumeRight then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.fthoraAboveQuantitativeNeumeRight])) end
-    if modeKey.tempo and modeKey.tempoAlignRight then tex.sprint(string.format("\\char\"%s", glyphNameToCodepointMap[modeKey.tempo])) end
+    if modeKey.tempo and not modeKey.tempoAlignRight then tex.sprint(string.format("\\hspace{6bp}\\raisebox{0.45em}{\\char\"%s}", glyphNameToCodepointMap[modeKey.tempo])) end
     
     -- end \textcolor and \makebox
     tex.sprint("}}")
-    tex.sprint(string.format("\\hspace{-%fbp}", modeKey.width))         
+    tex.sprint(string.format("\\hspace{-%fbp}", modeKey.width))      
+    
+    if (modeKey.tempo and modeKey.tempoAlignRight) or modeKey.showAmbitus then 
+        tex.sprint(string.format("\\makebox[%fbp][r]{", modeKey.width))
+        tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}\\byzneumefont", color, font_size))
+
+        if modeKey.showAmbitus then
+            tex.sprint(string.format("\\raisebox{3bp}{{\\sffamily{}(}\\raisebox{0.45em}{\\char\"%s\\char\"%s}\\hspace{7.5bp}{\\sffamily{}-}\\hspace{1.5bp}\\raisebox{0.45em}{\\char\"%s\\char\"%s}\\hspace{3bp}{\\sffamily{})}}", 
+                glyphNameToCodepointMap[modeKey.ambitusLowNote], 
+                glyphNameToCodepointMap[modeKey.ambitusLowRootSign],
+                glyphNameToCodepointMap[modeKey.ambitusHighNote], 
+                glyphNameToCodepointMap[modeKey.ambitusHighRootSign]))
+
+            if modeKey.tempo and modeKey.tempoAlignRight then tex.sprint("\\hspace{6bp}") end
+        end
+
+        if modeKey.tempo and modeKey.tempoAlignRight then tex.sprint(string.format("\\raisebox{0.45em}{\\char\"%s}", glyphNameToCodepointMap[modeKey.tempo])) end
+
+        -- end \textcolor and \makebox
+        tex.sprint("}}")
+
+        tex.sprint(string.format("\\hspace{-%fbp}", modeKey.width))      
+    end
+    
     -- end \mbox
     tex.sprint("}")
 
