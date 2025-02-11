@@ -3,6 +3,7 @@
   "pageSetup": {
     "lineHeight": 54.720000000000006,
     "dropCapDefaultFontSize": 60,
+    "modeKeyDefaultFontSize": 20,
     "neumeDefaultFontSize": 20,
     "lyricsDefaultFontSize": 12,
     "lyricsVerticalOffset": -18.6,
@@ -28,10 +29,16 @@
   },
   "lines": [
     {
-      "elements": []
-    },
-    {
-      "elements": []
+      "elements": [
+        {
+          "type": "modekey",
+          "width": 468,
+          "height": 36.75,
+          "alignment": "c",
+          "martyria": "modeFirst.salt01",
+          "note": "modePa"
+        }
+      ]
     },
     {
       "elements": [
@@ -53,8 +60,7 @@
           "ison": "isonIndicatorPa",
           "lyrics": "ord,",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 21.461922135353102,
-          "hyphenOffsets": []
+          "melismaWidth": 21.461922135353102
         },
         {
           "type": "note",
@@ -70,9 +76,7 @@
           "lyricsWidth": 4.451992034912109,
           "quantitativeNeume": "apostrofos",
           "lyrics": "I",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -81,9 +85,7 @@
           "lyricsWidth": 25.01996612548828,
           "quantitativeNeume": "oligon",
           "lyrics": "have",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -94,8 +96,7 @@
           "vocalExpression": "psifiston",
           "lyrics": "cried",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 19.21979567050937,
-          "hyphenOffsets": []
+          "melismaWidth": 19.21979567050937
         },
         {
           "type": "note",
@@ -138,8 +139,7 @@
           "vareia": true,
           "lyrics": "to",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 61.80727093696597,
-          "hyphenOffsets": []
+          "melismaWidth": 61.80727093696597
         },
         {
           "type": "note",
@@ -166,8 +166,7 @@
           "lyrics": "Thee,",
           "alignLeft": true,
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 15.062775101661629,
-          "hyphenOffsets": []
+          "melismaWidth": 15.062775101661629
         },
         {
           "type": "note",
@@ -217,9 +216,7 @@
           "lyricsWidth": 13.391990661621094,
           "quantitativeNeume": "oligonApostrofosKentimata",
           "lyrics": "en",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -250,8 +247,7 @@
           "quantitativeNeume": "runningElafron",
           "lyrics": "to",
           "lyricsHorizontalOffset": 10.177459716796875,
-          "melismaWidth": 58.58704483540853,
-          "hyphenOffsets": []
+          "melismaWidth": 58.58704483540853
         },
         {
           "type": "note",
@@ -277,9 +273,7 @@
           "quantitativeNeume": "ison",
           "time": "klasmaAbove",
           "lyrics": "me;",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "martyria",
@@ -318,8 +312,7 @@
           "quantitativeNeume": "runningElafron",
           "lyrics": "en",
           "lyricsHorizontalOffset": 10.177459716796875,
-          "melismaWidth": 23.315000116984123,
-          "hyphenOffsets": []
+          "melismaWidth": 23.315000116984123
         },
         {
           "type": "note",
@@ -361,8 +354,7 @@
           "ison": "isonIndicatorUnison",
           "lyrics": "to",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 19.368350565592436,
-          "hyphenOffsets": []
+          "melismaWidth": 19.368350565592436
         },
         {
           "type": "note",
@@ -383,8 +375,7 @@
           "quantitativeNeume": "oligon",
           "lyrics": "me,",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 71.45564496994018,
-          "hyphenOffsets": []
+          "melismaWidth": 71.45564496994018
         },
         {
           "type": "note",
@@ -412,8 +403,7 @@
           "time": "klasmaAbove",
           "lyrics": "O",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 65.4386249256134,
-          "hyphenOffsets": []
+          "melismaWidth": 65.4386249256134
         },
         {
           "type": "note",
@@ -447,9 +437,7 @@
           "quantitativeNeume": "ison",
           "time": "klasmaAbove",
           "lyrics": "Lord.",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "martyria",
@@ -468,8 +456,7 @@
           "vocalExpression": "omalonConnecting",
           "lyrics": "Lord,",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 34.50376814842228,
-          "hyphenOffsets": []
+          "melismaWidth": 34.50376814842228
         },
         {
           "type": "note",
@@ -485,9 +472,7 @@
           "lyricsWidth": 4.451992034912109,
           "quantitativeNeume": "apostrofos",
           "lyrics": "I",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -496,9 +481,7 @@
           "lyricsWidth": 25.01996612548828,
           "quantitativeNeume": "oligon",
           "lyrics": "have",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -510,8 +493,7 @@
           "accidental": "yfesis4",
           "lyrics": "cried",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 35.91364324569702,
-          "hyphenOffsets": []
+          "melismaWidth": 35.91364324569702
         },
         {
           "type": "note",
@@ -552,8 +534,7 @@
           "quantitativeNeume": "runningElafron",
           "lyrics": "to",
           "lyricsHorizontalOffset": 10.177459716796875,
-          "melismaWidth": 23.68192706637912,
-          "hyphenOffsets": []
+          "melismaWidth": 23.68192706637912
         },
         {
           "type": "note",
@@ -573,8 +554,7 @@
           "lyrics": "Thee,",
           "alignLeft": true,
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 15.9605636384752,
-          "hyphenOffsets": []
+          "melismaWidth": 15.9605636384752
         },
         {
           "type": "note",
@@ -620,8 +600,7 @@
           "quantitativeNeume": "apostrofos",
           "lyrics": "en",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 16.025698047214064,
-          "hyphenOffsets": []
+          "melismaWidth": 16.025698047214064
         },
         {
           "type": "note",
@@ -654,8 +633,7 @@
           "ison": "isonIndicatorUnison",
           "lyrics": "to",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 18.512086847093343,
-          "hyphenOffsets": []
+          "melismaWidth": 18.512086847093343
         },
         {
           "type": "note",
@@ -675,8 +653,7 @@
           "measureNumber": "measureNumber4",
           "lyrics": "me;",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 48.51335521274141,
-          "hyphenOffsets": []
+          "melismaWidth": 48.51335521274141
         },
         {
           "type": "note",
@@ -723,9 +700,7 @@
           "quantitativeNeume": "petastiKentima",
           "time": "klasmaBelow",
           "lyrics": "tend",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -734,9 +709,7 @@
           "lyricsWidth": 10.487995147705078,
           "quantitativeNeume": "apostrofos",
           "lyrics": "to",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         }
       ]
     },
@@ -749,9 +722,7 @@
           "lyricsWidth": 17.23198699951172,
           "quantitativeNeume": "apostrofos",
           "lyrics": "the",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -761,8 +732,7 @@
           "quantitativeNeume": "oligon",
           "lyrics": "voice",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 65.96992788875805,
-          "hyphenOffsets": []
+          "melismaWidth": 65.96992788875805
         },
         {
           "type": "note",
@@ -797,8 +767,7 @@
           "ison": "isonIndicatorUnison",
           "lyrics": "of",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 54.263687201107224,
-          "hyphenOffsets": []
+          "melismaWidth": 54.263687201107224
         },
         {
           "type": "note",
@@ -823,9 +792,7 @@
           "quantitativeNeume": "oligon",
           "time": "klasmaAbove",
           "lyrics": "my",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -910,9 +877,7 @@
           "quantitativeNeume": "ison",
           "time": "klasmaAbove",
           "lyrics": "tion",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "martyria",
@@ -933,9 +898,7 @@
           "quantitativeNeume": "oligonKentimaMiddle",
           "ison": "isonIndicatorGa",
           "lyrics": "when",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -944,9 +907,7 @@
           "lyricsWidth": 4.451992034912109,
           "quantitativeNeume": "ison",
           "lyrics": "I",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -957,8 +918,7 @@
           "vocalExpression": "psifiston",
           "lyrics": "cry",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 24.26052479463463,
-          "hyphenOffsets": []
+          "melismaWidth": 24.26052479463463
         },
         {
           "type": "note",
@@ -991,8 +951,7 @@
           "ison": "isonIndicatorPa",
           "lyrics": "to",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 19.521513770608323,
-          "hyphenOffsets": []
+          "melismaWidth": 19.521513770608323
         },
         {
           "type": "note",
@@ -1012,8 +971,7 @@
           "lyrics": "Thee:",
           "alignLeft": true,
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 80.11924676334158,
-          "hyphenOffsets": []
+          "melismaWidth": 80.11924676334158
         },
         {
           "type": "note",
@@ -1082,9 +1040,7 @@
           "quantitativeNeume": "ison",
           "time": "klasmaAbove",
           "lyrics": "en",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "note",
@@ -1119,9 +1075,7 @@
           "quantitativeNeume": "runningElafron",
           "time": "klasmaAbove",
           "lyrics": "to",
-          "lyricsHorizontalOffset": 10.177459716796875,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 10.177459716796875
         },
         {
           "type": "note",
@@ -1132,8 +1086,7 @@
           "ison": "isonIndicatorNi",
           "lyrics": "me,",
           "lyricsHorizontalOffset": 0,
-          "melismaWidth": 65.14678619384765,
-          "hyphenOffsets": []
+          "melismaWidth": 65.14678619384765
         },
         {
           "type": "note",
@@ -1170,8 +1123,7 @@
           "ison": "isonIndicatorPa",
           "lyrics": "O",
           "lyricsHorizontalOffset": 10.677326202392578,
-          "melismaWidth": 69.82107971191405,
-          "hyphenOffsets": []
+          "melismaWidth": 69.82107971191405
         },
         {
           "type": "note",
@@ -1205,9 +1157,7 @@
           "quantitativeNeume": "ison",
           "time": "dipli",
           "lyrics": "Lord.",
-          "lyricsHorizontalOffset": 0,
-          "melismaWidth": 0,
-          "hyphenOffsets": []
+          "lyricsHorizontalOffset": 0
         },
         {
           "type": "martyria",

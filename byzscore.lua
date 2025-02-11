@@ -352,7 +352,6 @@ function print_mode_key(modeKey, pageSetup)
     local color = modeKey.color and string.format('\\textcolor[HTML]{%s}', modeKey.color) or '\\textcolor{byzcolormodekey}' 
     
     tex.sprint("\\mbox{")
-    tex.sprint(string.format("\\hspace{%fbp}", modeKey.x)) 
     tex.sprint(string.format("\\makebox[%fbp][%s]{", modeKey.width, modeKey.alignment))
     tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}\\byzneumefont", color, font_size))
         
@@ -373,9 +372,10 @@ function print_mode_key(modeKey, pageSetup)
     -- end \textcolor and \makebox
     tex.sprint("}}")
     tex.sprint(string.format("\\hspace{-%fbp}", modeKey.width))         
-    tex.sprint(string.format("\\hspace{%fbp}", -modeKey.x)) 
     -- end \mbox
     tex.sprint("}")
+
+    tex.sprint(string.format('\\vspace{-\\baselineskip}\\vspace{%fbp}', modeKey.height))
 end
 
 function get_mark_offset(base, mark, extra_offset)
