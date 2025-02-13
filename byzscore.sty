@@ -8,6 +8,7 @@
 \newfontfamily\byzneumefont{Neanes}
 \newfontfamily\byzlyricfont{Source Serif 4}
 \newfontfamily\byzdropcapfont{Source Serif 4}
+\newfontfamily\byztextboxfont{Source Serif 4}
 
 \begin{luacode*}
     dofile("byzscore.lua")
@@ -26,6 +27,9 @@
 \newlength{\byzdropcapsize}
 \setlength{\byzdropcapsize}{60bp}
 
+\newlength{\byztextboxsize}
+\setlength{\byztextboxsize}{20bp}
+
 % Colors
 \definecolor{byzcoloraccidental}{HTML}{ED0000}
 \definecolor{byzcolordropcap}{HTML}{ED0000}
@@ -42,6 +46,7 @@
 \definecolor{byzcolorneume}{HTML}{000000}
 \definecolor{byzcolornoteindicator}{HTML}{ED0000}
 \definecolor{byzcolortempo}{HTML}{ED0000}
+\definecolor{byzcolortextbox}{HTML}{000000}
 
 % \byzneume
 % #1 optional color

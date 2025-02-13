@@ -30,10 +30,12 @@ function parse_notes(filename)
     tex.sprint(string.format("\\setlength{\\byzmodekeysize}{%fbp}", data.pageSetup.modeKeyDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
     tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.dropCapDefaultFontSize))
+    tex.sprint(string.format("\\setlength{\\byztextboxsize}{%fbp}", data.pageSetup.textBoxDefaultFontSize))
     
     tex.sprint(string.format("\\renewfontfamily{\\byzneumefont}{%s}", data.pageSetup.fontFamilies.neume))
     tex.sprint(string.format("\\renewfontfamily{\\byzlyricfont}{%s}", data.pageSetup.fontFamilies.lyrics))
     tex.sprint(string.format("\\renewfontfamily{\\byzdropcapfont}{%s}", data.pageSetup.fontFamilies.dropCap))
+    tex.sprint(string.format("\\renewfontfamily{\\byztextboxfont}{%s}", data.pageSetup.fontFamilies.textBox))
 
     tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
     
@@ -52,6 +54,7 @@ function parse_notes(filename)
     tex.sprint(string.format("\\definecolor{byzcolorneume}{HTML}{%s}", data.pageSetup.colors.neume))
     tex.sprint(string.format("\\definecolor{byzcolornoteindicator}{HTML}{%s}", data.pageSetup.colors.noteIndicator))
     tex.sprint(string.format("\\definecolor{byzcolortempo}{HTML}{%s}", data.pageSetup.colors.tempo))
+    tex.sprint(string.format("\\definecolor{byzcolortextbox}{HTML}{%s}", data.pageSetup.colors.textBox))
 
     for index, line in ipairs(data.lines) do
         if #line.elements > 0 then 
@@ -63,6 +66,7 @@ function parse_notes(filename)
             if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
             if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
             if element.type == 'modekey' then print_mode_key(element, data.pageSetup) end
+            if element.type == 'textbox' then print_text_box(element, data.pageSetup) end
         end
         if #line.elements > 0 and index < #data.lines then 
             tex.sprint("\\newline")
@@ -237,7 +241,7 @@ function print_note(note, pageSetup)
         local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
         local weight = note.lyricsFontWeight and string.format('\\addfontfeatures{Weight=%s}', note.lyricsFontWeight) or default_weight
         local style = note.lyricsFontStyle and note.lyricsFontStyle or pageSetup.lyricsDefaultFontStyle
-        local lyrics = style == 'italic' and string.format('\\textit{%s}', note.lyrics) or note.lyrics
+        local lyrics = style == 'italic' and string.format('\\textit{%s}', escape_latex(note.lyrics)) or escape_latex(note.lyrics)
         lyrics = note.lyricsFontFamily and string.format("{\\fontspec{%s}%s%s}", note.lyricsFontFamily, weight, lyrics) or string.format('\\byzlyricfont{}{%s%s}', weight, lyrics)
 
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - note.lyricsHorizontalOffset))    
@@ -341,7 +345,7 @@ function print_drop_cap(dropCap, pageSetup)
     local default_weight = pageSetup.dropCapDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.dropCapDefaultFontWeight) or ''
     local weight = dropCap.fontWeight and string.format('\\addfontfeatures{Weight=%s}', dropCap.fontWeight) or default_weight
     local style = dropCap.fontStyle and dropCap.fontStyle or pageSetup.dropCapDefaultFontStyle
-    local content = style == 'italic' and string.format('\\textit{%s}', dropCap.content) or dropCap.content
+    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(dropCap.content)) or escape_latex(dropCap.content)
     content = dropCap.fontFamily and string.format("{\\fontspec{%s}%s%s}", dropCap.fontFamily, weight, content) or string.format('\\byzdropcapfont{}{%s%s}', weight, content)
 
     tex.sprint("\\mbox{")
@@ -418,6 +422,80 @@ function print_mode_key(modeKey, pageSetup)
     tex.sprint(string.format('\\vspace{-\\baselineskip}\\vspace{%fbp}', height))
 end
 
+function print_text_box(textBox, pageSetup)
+    if textBox.inline then 
+        print_text_box_inline(textBox, pageSetup)
+        return
+    end
+
+    if textBox.content == '' then
+        tex.sprint('\\vspace{-\\baselineskip}')
+        tex.sprint(string.format('\\vspace{%fbp}', textBox.height))
+        return
+    end
+
+    local font_size = textBox.fontSize and string.format('%fbp', textBox.fontSize) or '\\byztextboxsize'
+    local color = textBox.color and string.format('\\color[HTML]{%s}', textBox.color) or '\\color{byzcolorlyrics}' 
+    local default_weight = pageSetup.textBoxDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.textBoxDefaultFontWeight) or ''
+    local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
+    local style = textBox.fontStyle and textBox.fontStyle or pageSetup.textBoxDefaultFontStyle
+    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
+    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byztextboxfont{}{%s%s}', weight, content)
+    
+    if textBox.marginTop then
+        tex.sprint('\\vspace{-\\baselineskip}')
+        tex.sprint(string.format('\\vspace{%fbp}',  textBox.marginTop))
+        tex.sprint('\\newline')
+    end
+
+    tex.sprint("\\mbox{")
+    tex.sprint(string.format("\\hspace{%fbp}", textBox.x)) 
+    tex.sprint(string.format("\\parbox[b][%fbp][c]{%fbp}{", textBox.height, textBox.width))
+    
+    if (textBox.alignment == 'c') then tex.sprint('\\centering') end
+    if (textBox.alignment == 'r') then tex.sprint('\\hfill') end
+    
+    tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}%s", color, font_size, content))
+
+    -- end \textcolor and \parbox
+    tex.sprint("}}")
+    tex.sprint(string.format("\\hspace{-%fbp}", textBox.width))      
+
+    -- end \mbox
+    tex.sprint("}")
+
+    local height = textBox.height
+    
+    if textBox.marginBottom then
+        height = height + textBox.marginBottom
+    end
+
+    tex.sprint(string.format('\\vspace{-\\baselineskip}\\vspace{%fbp}', height))
+end
+
+function print_text_box_inline(textBox, pageSetup)
+    local font_size = textBox.fontSize and string.format('%fbp', textBox.fontSize) or '\\byzlyricsize'
+    local color = textBox.color and string.format('\\textcolor[HTML]{%s}', textBox.color) or '\\textcolor{byzcolorlyrics}' 
+    local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
+    local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
+    local style = textBox.fontStyle and textBox.fontStyle or pageSetup.lyricsDefaultFontStyle
+    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
+    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byzlyricfont{}{%s%s}', weight, content)
+    
+    tex.sprint("\\mbox{")
+    tex.sprint(string.format("\\hspace{%fbp}", textBox.x)) 
+    tex.sprint(string.format("\\makebox[%fbp][%s]{", textBox.width, textBox.alignment))
+    tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}%s", color, font_size, content))
+
+    -- end \textcolor and \makebox
+    tex.sprint("}}")
+    tex.sprint(string.format("\\hspace{-%fbp}", textBox.width))      
+    tex.sprint(string.format("\\hspace{%fbp}", -textBox.x)) 
+
+    -- end \mbox
+    tex.sprint("}")
+end
+
 function get_mark_offset(base, mark, extra_offset)
     local mark_anchor_name = find_mark_anchor_name(base, mark)
 
@@ -456,4 +534,30 @@ function find_mark_anchor_name(base, mark)
     end
 
     return nil 
+end
+
+function escape_latex(str)
+    local replacements = {
+        ["\\"] = "\\textbackslash{}", 
+        ["{"]  = "\\{",  
+        ["}"]  = "\\}",
+        ["$"]  = "\\$",  
+        ["&"]  = "\\&",    
+        ["%"]  = "\\%",
+        ["#"]  = "\\#",  
+        ["_"]  = "\\_",    
+        ["^"]  = "\\textasciicircum{}",
+        ["~"]  = "\\textasciitilde{}", 
+        ["\n"] = "\\\\",
+        ["\u{E280}"] = "{\\byzneumefont\u{E280}}",
+        ["\u{E281}"] = "{\\byzneumefont\u{E281}}",
+        ["\u{1D0B4}"] = "{\\byzneumefont\u{1D0B4}}",
+        ["\u{1D0B5}"] = "{\\byzneumefont\u{1D0B5}}",
+    }
+    return str:gsub("[\\%$%&%#_%^{}~\n]", replacements)
+              :gsub("\u{E280}", replacements["\u{E280}"])
+              :gsub("\u{E281}", replacements["\u{E281}"])
+              :gsub("\u{1D0B4}", replacements["\u{1D0B4}"])
+              :gsub("\u{1D0B5}", replacements["\u{1D0B5}"])
+    
 end
