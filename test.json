@@ -2,6 +2,11 @@
   "schemaVersion": 1,
   "pageSetup": {
     "lineHeight": 54.720000000000006,
+    "fontFamilies": {
+      "dropCap": "PFGoudy Initials",
+      "lyrics": "Source Serif 4",
+      "neume": "Neanes"
+    },
     "dropCapDefaultFontSize": 60,
     "modeKeyDefaultFontSize": 20,
     "neumeDefaultFontSize": 20,
@@ -9,7 +14,7 @@
     "lyricsVerticalOffset": -18.6,
     "lyricsMelismaSpacing": 1.8,
     "lyricsMelismaThickness": 0.75,
-    "defaultColors": {
+    "colors": {
       "accidental": "800000",
       "dropCap": "800000",
       "fthora": "800000",
@@ -1167,9 +1172,6 @@
           "rootSign": "martyriaAlphaBelow"
         }
       ]
-    },
-    {
-      "elements": []
     }
   ]
 }
