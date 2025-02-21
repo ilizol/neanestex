@@ -235,7 +235,7 @@ function print_note(note, pageSetup)
     tex.sprint("}")
 
     if note.lyrics then
-        local lyricPos = note.alignLeft and "l" or "c"
+        local lyricPos = note.lyricsLeftAlign and "l" or "c"
         local fontSize = note.lyricsFontSize and string.format('%fbp', note.lyricsFontSize) or '\\byzlyricsize'
         local color = note.lyricsColor and string.format('\\textcolor[HTML]{%s}', note.lyricsColor) or '\\textcolor{byzcolorlyrics}' 
         local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
