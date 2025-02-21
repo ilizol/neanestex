@@ -244,8 +244,12 @@ function print_note(note, pageSetup)
         local lyrics = style == 'italic' and string.format('\\textit{%s}', escape_latex(note.lyrics)) or escape_latex(note.lyrics)
         lyrics = note.lyricsFontFamily and string.format("{\\fontspec{%s}%s%s}", note.lyricsFontFamily, weight, lyrics) or string.format('\\byzlyricfont{}{%s%s}', weight, lyrics)
 
-        tex.sprint(string.format("\\hspace{-%fbp}", note.width - note.lyricsHorizontalOffset))    
-        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, note.width - note.lyricsHorizontalOffset, lyricPos, fontSize, lyrics))
+        offset = 0
+
+        if note.lyricsHorizontalOffset then offset = note.lyricsHorizontalOffset end
+
+        tex.sprint(string.format("\\hspace{-%fbp}", note.width - offset))    
+        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, note.width - offset, lyricPos, fontSize, lyrics))
 
         -- Melismas
         if note.melismaWidth and note.melismaWidth > 0 then
