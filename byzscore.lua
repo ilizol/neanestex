@@ -11,7 +11,18 @@ function parse_notes(filename)
     local data = json.decode(read_json(filename))
 
     local glyphnames = json.decode(read_json("glyphnames.json"))
-    font_metadata = json.decode(read_json("neanes.metadata.json"))
+
+    local font_metadata_filename = 'neanes.metadata.json'
+
+    if data.pageSetup.fontFamilies.neume == 'Neanes' then
+        font_metadata_filename = "neanes.metadata.json"
+    elseif data.pageSetup.fontFamilies.neume == 'NeanesRTL' then
+        font_metadata_filename = "neanesrtl.metadata.json"
+    elseif data.pageSetup.fontFamilies.neume == 'NeanesStathisSeries' then
+        font_metadata_filename = "neanesstathisseries.metadata.json"
+    end
+
+    font_metadata = json.decode(read_json(font_metadata_filename))
 
     glyphNameToCodepointMap = {}
 
