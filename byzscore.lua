@@ -37,11 +37,11 @@ function parse_notes(filename)
     -- open a new section so that our variables do not persist forever
     tex.sprint('{')
 
-    tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.neumeDefaultFontSize))
-    tex.sprint(string.format("\\setlength{\\byzmodekeysize}{%fbp}", data.pageSetup.modeKeyDefaultFontSize))
-    tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.lyricsDefaultFontSize))
-    tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.dropCapDefaultFontSize))
-    tex.sprint(string.format("\\setlength{\\byztextboxsize}{%fbp}", data.pageSetup.textBoxDefaultFontSize))
+    tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.fontSizes.neume))
+    tex.sprint(string.format("\\setlength{\\byzmodekeysize}{%fbp}", data.pageSetup.fontSizes.modeKey))
+    tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.fontSizes.lyrics))
+    tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.fontSizes.dropCap))
+    tex.sprint(string.format("\\setlength{\\byztextboxsize}{%fbp}", data.pageSetup.fontSizes.textBox))
     
     tex.sprint(string.format("\\renewfontfamily{\\byzneumefont}{%s}", data.pageSetup.fontFamilies.neume))
     tex.sprint(string.format("\\renewfontfamily{\\byzlyricfont}{%s}", data.pageSetup.fontFamilies.lyrics))
