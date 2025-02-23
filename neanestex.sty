@@ -1,9 +1,11 @@
-\ProvidesPackage{byzscore}
+
+\ProvidesPackage{neanestex}
 
 \RequirePackage{xcolor}
 \RequirePackage{luacode}
 \RequirePackage{luacolor}
 \RequirePackage{fontspec}
+\RequireLuaTeX
 
 \newfontfamily\byzneumefont{Neanes}
 \newfontfamily\byzlyricfont{Source Serif 4}
@@ -11,7 +13,7 @@
 \newfontfamily\byztextboxfont{Source Serif 4}
 
 \begin{luacode*}
-    dofile("byzscore.lua")
+    dofile("neanestex.lua")
 \end{luacode*}
 
 % Font sizes
@@ -61,6 +63,6 @@
 }
 
 % Command to draw a full score at the macro insertion point
-\newcommand{\byzscore}[1]{%
-    \directlua{parse_notes("#1")}
+\newcommand{\neanesscore}[1]{%
+    \directlua{neanestex.include_score("#1")}
 }

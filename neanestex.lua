@@ -1,4 +1,11 @@
-function read_json(filename)
+neanestex = neanestex or {}
+local neanestex = neanestex
+
+local json = require "json"
+local font_metadata = nil
+local glyphNameToCodepointMap = {}
+
+local function read_json(filename)
     local file = io.open(filename, "r")
     if not file then return "{}" end
     local content = file:read("*all")
@@ -6,90 +13,75 @@ function read_json(filename)
     return content
 end
 
-function parse_notes(filename)
-    local json = require "json"
-    local data = json.decode(read_json(filename))
+local glyphnames = json.decode(read_json("glyphnames.json"))
 
-    local glyphnames = json.decode(read_json("glyphnames.json"))
+local function get_mark_offset(base, mark, extra_offset)
+    local mark_anchor_name = find_mark_anchor_name(base, mark)
 
-    local font_metadata_filename = 'neanes.metadata.json'
-
-    if data.pageSetup.fontFamilies.neume == 'Neanes' then
-        font_metadata_filename = "neanes.metadata.json"
-    elseif data.pageSetup.fontFamilies.neume == 'NeanesRTL' then
-        font_metadata_filename = "neanesrtl.metadata.json"
-    elseif data.pageSetup.fontFamilies.neume == 'NeanesStathisSeries' then
-        font_metadata_filename = "neanesstathisseries.metadata.json"
+    if mark_anchor_name == nil then
+      texio.write_nl("warning", "Missing anchor for base: " .. base ..  "mark: " .. mark)
+      return { x = 0, y = 0 }
     end
 
-    font_metadata = json.decode(read_json(font_metadata_filename))
+    local mark_anchor = font_metadata.glyphsWithAnchors[mark][
+      mark_anchor_name
+    ]
 
-    glyphNameToCodepointMap = {}
+    local base_anchor = font_metadata.glyphsWithAnchors[base][
+      mark_anchor_name
+    ]
 
-    for glyph, data in pairs(glyphnames) do
-        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
+    local extra_x = 0
+    local extra_y = 0
+
+    if extra_offset then
+        extra_x = extra_offset.x
+        extra_y = extra_offset.y
     end
 
-    for glyph, data in pairs(font_metadata.optionalGlyphs) do
-        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
-    end
-
-    -- open a new section so that our variables do not persist forever
-    tex.sprint('{')
-
-    tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.fontSizes.neume))
-    tex.sprint(string.format("\\setlength{\\byzmodekeysize}{%fbp}", data.pageSetup.fontSizes.modeKey))
-    tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.fontSizes.lyrics))
-    tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.fontSizes.dropCap))
-    tex.sprint(string.format("\\setlength{\\byztextboxsize}{%fbp}", data.pageSetup.fontSizes.textBox))
-    
-    tex.sprint(string.format("\\renewfontfamily{\\byzneumefont}{%s}", data.pageSetup.fontFamilies.neume))
-    tex.sprint(string.format("\\renewfontfamily{\\byzlyricfont}{%s}", data.pageSetup.fontFamilies.lyrics))
-    tex.sprint(string.format("\\renewfontfamily{\\byzdropcapfont}{%s}", data.pageSetup.fontFamilies.dropCap))
-    tex.sprint(string.format("\\renewfontfamily{\\byztextboxfont}{%s}", data.pageSetup.fontFamilies.textBox))
-
-    tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
-    
-    tex.sprint(string.format("\\definecolor{byzcoloraccidental}{HTML}{%s}", data.pageSetup.colors.accidental))
-    tex.sprint(string.format("\\definecolor{byzcolordropcap}{HTML}{%s}", data.pageSetup.colors.dropCap))
-    tex.sprint(string.format("\\definecolor{byzcolorfthora}{HTML}{%s}", data.pageSetup.colors.fthora))
-    tex.sprint(string.format("\\definecolor{byzcolorgorgon}{HTML}{%s}", data.pageSetup.colors.gorgon))
-    tex.sprint(string.format("\\definecolor{byzcolorheteron}{HTML}{%s}", data.pageSetup.colors.heteron))
-    tex.sprint(string.format("\\definecolor{byzcolorison}{HTML}{%s}", data.pageSetup.colors.ison))
-    tex.sprint(string.format("\\definecolor{byzcolorkoronis}{HTML}{%s}", data.pageSetup.colors.koronis))
-    tex.sprint(string.format("\\definecolor{byzcolorlyrics}{HTML}{%s}", data.pageSetup.colors.lyrics))
-    tex.sprint(string.format("\\definecolor{byzcolormartyria}{HTML}{%s}", data.pageSetup.colors.martyria))
-    tex.sprint(string.format("\\definecolor{byzcolormeasurebar}{HTML}{%s}", data.pageSetup.colors.measureBar))
-    tex.sprint(string.format("\\definecolor{byzcolormeasurenumber}{HTML}{%s}", data.pageSetup.colors.measureNumber))
-    tex.sprint(string.format("\\definecolor{byzcolormodekey}{HTML}{%s}", data.pageSetup.colors.modeKey))
-    tex.sprint(string.format("\\definecolor{byzcolorneume}{HTML}{%s}", data.pageSetup.colors.neume))
-    tex.sprint(string.format("\\definecolor{byzcolornoteindicator}{HTML}{%s}", data.pageSetup.colors.noteIndicator))
-    tex.sprint(string.format("\\definecolor{byzcolortempo}{HTML}{%s}", data.pageSetup.colors.tempo))
-    tex.sprint(string.format("\\definecolor{byzcolortextbox}{HTML}{%s}", data.pageSetup.colors.textBox))
-
-    for index, line in ipairs(data.lines) do
-        if #line.elements > 0 then 
-            tex.sprint("\\noindent")
-        end
-        for _, element in ipairs(line.elements) do
-            if element.type == 'note' then print_note(element, data.pageSetup) end
-            if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
-            if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
-            if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
-            if element.type == 'modekey' then print_mode_key(element, data.pageSetup) end
-            if element.type == 'textbox' then print_text_box(element, data.pageSetup) end
-        end
-        if #line.elements > 0 and index < #data.lines then 
-            tex.sprint("\\newline")
-        end
-    end
-
-    tex.sprint("\\par")
-    -- close the section
-    tex.sprint("}")
+    return {
+      x = base_anchor[1] - mark_anchor[1] + extra_x,
+      y = -(base_anchor[2] - mark_anchor[2]) + extra_y,
+    }
 end
 
-function print_note(note, pageSetup)
+local function find_mark_anchor_name(base, mark)
+    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
+        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
+            return anchor_name
+        end
+    end
+
+    return nil 
+end
+
+local function escape_latex(str)
+    local replacements = {
+        ["\\"] = "\\textbackslash{}", 
+        ["{"]  = "\\{",  
+        ["}"]  = "\\}",
+        ["$"]  = "\\$",  
+        ["&"]  = "\\&",    
+        ["%"]  = "\\%",
+        ["#"]  = "\\#",  
+        ["_"]  = "\\_",    
+        ["^"]  = "\\textasciicircum{}",
+        ["~"]  = "\\textasciitilde{}", 
+        ["\n"] = "\\\\",
+        ["\u{E280}"] = "{\\byzneumefont\u{E280}}",
+        ["\u{E281}"] = "{\\byzneumefont\u{E281}}",
+        ["\u{1D0B4}"] = "{\\byzneumefont\u{1D0B4}}",
+        ["\u{1D0B5}"] = "{\\byzneumefont\u{1D0B5}}",
+    }
+    return str:gsub("[\\%$%&%#_%^{}~\n]", replacements)
+              :gsub("\u{E280}", replacements["\u{E280}"])
+              :gsub("\u{E281}", replacements["\u{E281}"])
+              :gsub("\u{1D0B4}", replacements["\u{1D0B4}"])
+              :gsub("\u{1D0B5}", replacements["\u{1D0B5}"])
+    
+end
+
+local function print_note(note, pageSetup)
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", note.x)) 
     tex.sprint(string.format("\\makebox[%fbp]{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont", note.width))
@@ -255,7 +247,7 @@ function print_note(note, pageSetup)
         local lyrics = style == 'italic' and string.format('\\textit{%s}', escape_latex(note.lyrics)) or escape_latex(note.lyrics)
         lyrics = note.lyricsFontFamily and string.format("{\\fontspec{%s}%s%s}", note.lyricsFontFamily, weight, lyrics) or string.format('\\byzlyricfont{}{%s%s}', weight, lyrics)
 
-        offset = 0
+        local offset = 0
 
         if note.lyricsHorizontalOffset then offset = note.lyricsHorizontalOffset end
 
@@ -298,7 +290,7 @@ function print_note(note, pageSetup)
     tex.sprint("}")
 end
 
-function print_martyria(martyria, pageSetup) 
+local function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
     tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
@@ -339,7 +331,7 @@ function print_martyria(martyria, pageSetup)
     tex.sprint("}")
 end
 
-function print_tempo(tempo, pageSetup) 
+local function print_tempo(tempo, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", tempo.x)) 
     tex.sprint(string.format("\\textcolor{byzcolortempo}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
@@ -354,7 +346,7 @@ function print_tempo(tempo, pageSetup)
     tex.sprint("}")
 end
 
-function print_drop_cap(dropCap, pageSetup) 
+local function print_drop_cap(dropCap, pageSetup) 
     local font_size = dropCap.fontSize and string.format("%fbp", dropCap.fontSize) or '\\byzdropcapsize' 
     local color = dropCap.color and string.format('\\textcolor[HTML]{%s}', dropCap.color) or '\\textcolor{byzcolordropcap}' 
     local default_weight = pageSetup.dropCapDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.dropCapDefaultFontWeight) or ''
@@ -373,7 +365,7 @@ function print_drop_cap(dropCap, pageSetup)
     tex.sprint("}")
 end
 
-function print_mode_key(modeKey, pageSetup)
+local function print_mode_key(modeKey, pageSetup)
     local font_size = modeKey.fontSize and string.format("%fbp", modeKey.fontSize) or '\\byzmodekeysize' 
     local color = modeKey.color and string.format('\\textcolor[HTML]{%s}', modeKey.color) or '\\textcolor{byzcolormodekey}' 
     
@@ -439,7 +431,30 @@ function print_mode_key(modeKey, pageSetup)
     tex.sprint(string.format('\\vspace{-\\baselineskip}\\vspace{%fbp}', height))
 end
 
-function print_text_box(textBox, pageSetup)
+local function print_text_box_inline(textBox, pageSetup)
+    local font_size = textBox.fontSize and string.format('%fbp', textBox.fontSize) or '\\byzlyricsize'
+    local color = textBox.color and string.format('\\textcolor[HTML]{%s}', textBox.color) or '\\textcolor{byzcolorlyrics}' 
+    local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
+    local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
+    local style = textBox.fontStyle and textBox.fontStyle or pageSetup.lyricsDefaultFontStyle
+    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
+    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byzlyricfont{}{%s%s}', weight, content)
+    
+    tex.sprint("\\mbox{")
+    tex.sprint(string.format("\\hspace{%fbp}", textBox.x)) 
+    tex.sprint(string.format("\\makebox[%fbp][%s]{", textBox.width, textBox.alignment))
+    tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}%s", color, font_size, content))
+
+    -- end \textcolor and \makebox
+    tex.sprint("}}")
+    tex.sprint(string.format("\\hspace{-%fbp}", textBox.width))      
+    tex.sprint(string.format("\\hspace{%fbp}", -textBox.x)) 
+
+    -- end \mbox
+    tex.sprint("}")
+end
+
+local function print_text_box(textBox, pageSetup)
     if textBox.inline then 
         print_text_box_inline(textBox, pageSetup)
         return
@@ -490,91 +505,85 @@ function print_text_box(textBox, pageSetup)
     tex.sprint(string.format('\\vspace{-\\baselineskip}\\vspace{%fbp}', height))
 end
 
-function print_text_box_inline(textBox, pageSetup)
-    local font_size = textBox.fontSize and string.format('%fbp', textBox.fontSize) or '\\byzlyricsize'
-    local color = textBox.color and string.format('\\textcolor[HTML]{%s}', textBox.color) or '\\textcolor{byzcolorlyrics}' 
-    local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
-    local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
-    local style = textBox.fontStyle and textBox.fontStyle or pageSetup.lyricsDefaultFontStyle
-    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
-    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byzlyricfont{}{%s%s}', weight, content)
+local function include_score(filename)
+    local data = json.decode(read_json(filename))
+
+    local font_metadata_filename = 'neanes.metadata.json'
+
+    if data.pageSetup.fontFamilies.neume == 'Neanes' then
+        font_metadata_filename = "neanes.metadata.json"
+    elseif data.pageSetup.fontFamilies.neume == 'NeanesRTL' then
+        font_metadata_filename = "neanesrtl.metadata.json"
+    elseif data.pageSetup.fontFamilies.neume == 'NeanesStathisSeries' then
+        font_metadata_filename = "neanesstathisseries.metadata.json"
+    end
+
+    font_metadata = json.decode(read_json(font_metadata_filename))
+
+    glyphNameToCodepointMap = {}
+
+    for glyph, data in pairs(glyphnames) do
+        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
+    end
+
+    for glyph, data in pairs(font_metadata.optionalGlyphs) do
+        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
+    end
+
+    -- open a new section so that our variables do not persist forever
+    tex.sprint('{')
+
+    tex.sprint(string.format("\\setlength{\\byzneumesize}{%fbp}", data.pageSetup.fontSizes.neume))
+    tex.sprint(string.format("\\setlength{\\byzmodekeysize}{%fbp}", data.pageSetup.fontSizes.modeKey))
+    tex.sprint(string.format("\\setlength{\\byzlyricsize}{%fbp}", data.pageSetup.fontSizes.lyrics))
+    tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.fontSizes.dropCap))
+    tex.sprint(string.format("\\setlength{\\byztextboxsize}{%fbp}", data.pageSetup.fontSizes.textBox))
     
-    tex.sprint("\\mbox{")
-    tex.sprint(string.format("\\hspace{%fbp}", textBox.x)) 
-    tex.sprint(string.format("\\makebox[%fbp][%s]{", textBox.width, textBox.alignment))
-    tex.sprint(string.format("%s{\\fontsize{%s}{\\baselineskip}%s", color, font_size, content))
+    tex.sprint(string.format("\\renewfontfamily{\\byzneumefont}{%s}", data.pageSetup.fontFamilies.neume))
+    tex.sprint(string.format("\\renewfontfamily{\\byzlyricfont}{%s}", data.pageSetup.fontFamilies.lyrics))
+    tex.sprint(string.format("\\renewfontfamily{\\byzdropcapfont}{%s}", data.pageSetup.fontFamilies.dropCap))
+    tex.sprint(string.format("\\renewfontfamily{\\byztextboxfont}{%s}", data.pageSetup.fontFamilies.textBox))
 
-    -- end \textcolor and \makebox
-    tex.sprint("}}")
-    tex.sprint(string.format("\\hspace{-%fbp}", textBox.width))      
-    tex.sprint(string.format("\\hspace{%fbp}", -textBox.x)) 
+    tex.sprint(string.format("\\setlength{\\baselineskip}{%fbp}", data.pageSetup.lineHeight))
+    
+    tex.sprint(string.format("\\definecolor{byzcoloraccidental}{HTML}{%s}", data.pageSetup.colors.accidental))
+    tex.sprint(string.format("\\definecolor{byzcolordropcap}{HTML}{%s}", data.pageSetup.colors.dropCap))
+    tex.sprint(string.format("\\definecolor{byzcolorfthora}{HTML}{%s}", data.pageSetup.colors.fthora))
+    tex.sprint(string.format("\\definecolor{byzcolorgorgon}{HTML}{%s}", data.pageSetup.colors.gorgon))
+    tex.sprint(string.format("\\definecolor{byzcolorheteron}{HTML}{%s}", data.pageSetup.colors.heteron))
+    tex.sprint(string.format("\\definecolor{byzcolorison}{HTML}{%s}", data.pageSetup.colors.ison))
+    tex.sprint(string.format("\\definecolor{byzcolorkoronis}{HTML}{%s}", data.pageSetup.colors.koronis))
+    tex.sprint(string.format("\\definecolor{byzcolorlyrics}{HTML}{%s}", data.pageSetup.colors.lyrics))
+    tex.sprint(string.format("\\definecolor{byzcolormartyria}{HTML}{%s}", data.pageSetup.colors.martyria))
+    tex.sprint(string.format("\\definecolor{byzcolormeasurebar}{HTML}{%s}", data.pageSetup.colors.measureBar))
+    tex.sprint(string.format("\\definecolor{byzcolormeasurenumber}{HTML}{%s}", data.pageSetup.colors.measureNumber))
+    tex.sprint(string.format("\\definecolor{byzcolormodekey}{HTML}{%s}", data.pageSetup.colors.modeKey))
+    tex.sprint(string.format("\\definecolor{byzcolorneume}{HTML}{%s}", data.pageSetup.colors.neume))
+    tex.sprint(string.format("\\definecolor{byzcolornoteindicator}{HTML}{%s}", data.pageSetup.colors.noteIndicator))
+    tex.sprint(string.format("\\definecolor{byzcolortempo}{HTML}{%s}", data.pageSetup.colors.tempo))
+    tex.sprint(string.format("\\definecolor{byzcolortextbox}{HTML}{%s}", data.pageSetup.colors.textBox))
 
-    -- end \mbox
-    tex.sprint("}")
-end
-
-function get_mark_offset(base, mark, extra_offset)
-    local mark_anchor_name = find_mark_anchor_name(base, mark)
-
-    if mark_anchor_name == nil then
-      texio.write_nl("warning", "Missing anchor for base: " .. base ..  "mark: " .. mark)
-      return { x = 0, y = 0 }
-    end
-
-    local mark_anchor = font_metadata.glyphsWithAnchors[mark][
-      mark_anchor_name
-    ]
-
-    local base_anchor = font_metadata.glyphsWithAnchors[base][
-      mark_anchor_name
-    ]
-
-    local extra_x = 0
-    local extra_y = 0
-
-    if extra_offset then
-        extra_x = extra_offset.x
-        extra_y = extra_offset.y
-    end
-
-    return {
-      x = base_anchor[1] - mark_anchor[1] + extra_x,
-      y = -(base_anchor[2] - mark_anchor[2]) + extra_y,
-    }
-end
-
-function find_mark_anchor_name(base, mark)
-    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
-        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
-            return anchor_name
+    for index, line in ipairs(data.lines) do
+        if #line.elements > 0 then 
+            tex.sprint("\\noindent")
+        end
+        for _, element in ipairs(line.elements) do
+            if element.type == 'note' then print_note(element, data.pageSetup) end
+            if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
+            if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
+            if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
+            if element.type == 'modekey' then print_mode_key(element, data.pageSetup) end
+            if element.type == 'textbox' then print_text_box(element, data.pageSetup) end
+        end
+        if #line.elements > 0 and index < #data.lines then 
+            tex.sprint("\\newline")
         end
     end
 
-    return nil 
+    tex.sprint("\\par")
+    -- close the section
+    tex.sprint("}")
 end
 
-function escape_latex(str)
-    local replacements = {
-        ["\\"] = "\\textbackslash{}", 
-        ["{"]  = "\\{",  
-        ["}"]  = "\\}",
-        ["$"]  = "\\$",  
-        ["&"]  = "\\&",    
-        ["%"]  = "\\%",
-        ["#"]  = "\\#",  
-        ["_"]  = "\\_",    
-        ["^"]  = "\\textasciicircum{}",
-        ["~"]  = "\\textasciitilde{}", 
-        ["\n"] = "\\\\",
-        ["\u{E280}"] = "{\\byzneumefont\u{E280}}",
-        ["\u{E281}"] = "{\\byzneumefont\u{E281}}",
-        ["\u{1D0B4}"] = "{\\byzneumefont\u{1D0B4}}",
-        ["\u{1D0B5}"] = "{\\byzneumefont\u{1D0B5}}",
-    }
-    return str:gsub("[\\%$%&%#_%^{}~\n]", replacements)
-              :gsub("\u{E280}", replacements["\u{E280}"])
-              :gsub("\u{E281}", replacements["\u{E281}"])
-              :gsub("\u{1D0B4}", replacements["\u{1D0B4}"])
-              :gsub("\u{1D0B5}", replacements["\u{1D0B5}"])
-    
-end
+neanestex.glyphnames    = glyphnames
+neanestex.include_score = include_score
