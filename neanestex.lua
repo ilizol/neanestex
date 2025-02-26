@@ -505,9 +505,36 @@ local function print_text_box(textBox, pageSetup)
     tex.sprint(string.format('\\vspace{-\\baselineskip}\\vspace{%fbp}', height))
 end
 
-local function include_score(filename)
+local function include_score(filename, sectionName)
     local data = json.decode(read_json(filename))
 
+    -- Find the section(s)
+    local sections = {}
+
+    if sectionName == '*' then
+        sections = data.sections
+    else
+        local section = nil
+
+        for _, s in ipairs(data.sections) do
+            if (sectionName == '' and s.default) or s.name == sectionName then
+                section = s
+                break
+            end
+        end
+
+        if section == nil and sectionName == nil then 
+            tex.error("Could not find default section")
+        end
+
+        if section == nil then 
+            tex.error("Could not find section " .. sectionName)
+        end
+
+        sections[1] = section
+    end
+
+    -- Load the font metadata
     local font_metadata_filename = 'neanes.metadata.json'
 
     if data.pageSetup.fontFamilies.neume == 'Neanes' then
@@ -563,20 +590,27 @@ local function include_score(filename)
     tex.sprint(string.format("\\definecolor{byzcolortempo}{HTML}{%s}", data.pageSetup.colors.tempo))
     tex.sprint(string.format("\\definecolor{byzcolortextbox}{HTML}{%s}", data.pageSetup.colors.textBox))
 
-    for index, line in ipairs(data.lines) do
-        if #line.elements > 0 then 
-            tex.sprint("\\noindent")
-        end
-        for _, element in ipairs(line.elements) do
-            if element.type == 'note' then print_note(element, data.pageSetup) end
-            if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
-            if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
-            if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
-            if element.type == 'modekey' then print_mode_key(element, data.pageSetup) end
-            if element.type == 'textbox' then print_text_box(element, data.pageSetup) end
-        end
-        if #line.elements > 0 and index < #data.lines then 
-            tex.sprint("\\newline")
+    first_line = true
+
+    for section_index, section in ipairs(sections) do
+        for line_index, line in ipairs(section.lines) do
+            if #line.elements > 0 and not first_line then 
+                tex.sprint("\\newline")
+            else
+                first_line = false
+            end
+
+            if #line.elements > 0 then
+                tex.sprint("\\noindent")
+            end
+            for _, element in ipairs(line.elements) do
+                if element.type == 'note' then print_note(element, data.pageSetup) end
+                if element.type == 'martyria' then print_martyria(element, data.pageSetup) end
+                if element.type == 'tempo' then print_tempo(element, data.pageSetup) end
+                if element.type == 'dropcap' then print_drop_cap(element, data.pageSetup) end
+                if element.type == 'modekey' then print_mode_key(element, data.pageSetup) end
+                if element.type == 'textbox' then print_text_box(element, data.pageSetup) end
+            end
         end
     end
 
@@ -585,5 +619,4 @@ local function include_score(filename)
     tex.sprint("}")
 end
 
-neanestex.glyphnames    = glyphnames
 neanestex.include_score = include_score

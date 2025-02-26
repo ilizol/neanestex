@@ -63,6 +63,6 @@
 }
 
 % Command to draw a full score at the macro insertion point
-\newcommand{\neanesscore}[1]{%
-    \directlua{neanestex.include_score("#1")}
+\newcommand{\neanesscore}[2]{%
+    \directlua{neanestex.include_score("#1", "#2")}
 }
