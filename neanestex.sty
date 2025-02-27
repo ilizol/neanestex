@@ -50,19 +50,27 @@
 \definecolor{byzcolortempo}{HTML}{ED0000}
 \definecolor{byzcolortextbox}{HTML}{000000}
 
-% \byzneume
-% #1 optional color
-% #2 required hex unicode value
-% Example usage:
-% \byzneume[E000] prints an ison in the default color and size
-\newcommand{\byzneume}[2][000000]{%
-\textcolor[HTML]{#1}{%
-\fontsize{\byzneumesize}{\baselineskip}%
-\byzneumefont%
-\char"#2}%
+% Draws a score
+% If section name is blank, the default section will be used. Ex: \neanesscore{example.byztex}{} 
+% If section name is *, all sections will be used. Ex: \neanesscore{example.byztex}{*}
+% Otherwise only the specified section is drawn. Ex: \neanesscore{example.byztex}{olihc-1} 
+\newcommand{\neanesscore}[2]{% #1 = filename, #2 = sectionname
+    \directlua{neanestex.include_score("#1", "#2")}%
 }
 
-% Command to draw a full score at the macro insertion point
-\newcommand{\neanesscore}[2]{%
-    \directlua{neanestex.include_score("#1", "#2")}
+% Set the neume font used for commands like \byzcodepoint and \byzglyph.
+% Note that \neanesscore will not use this value, but rather the values
+% found in the file's page setup.
+\newcommand{\byzsetneumefont}[1]{% #1 = fontname
+    \directlua{neanestex.set_neume_font("#1")}%
+}
+
+% Gets the codepoint for a glyph
+\newcommand{\byzcodepoint}[1]{% #1 = glyphname
+    \directlua{neanestex.codepoint_from_glyph_name("#1")}%
+}
+
+% Draws a glyph by glyphname
+\newcommand{\byzglyph}[1]{% #1 = glyphname
+    \char"\byzcodepoint{#1}%
 }

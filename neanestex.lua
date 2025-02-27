@@ -2,8 +2,10 @@ neanestex = neanestex or {}
 local neanestex = neanestex
 
 local json = require "json"
-local font_metadata = nil
 local glyphNameToCodepointMap = {}
+local font_metadata = nil
+local neume_font_data_map = {}
+local neume_font = nil
 
 local function read_json(filename)
     local file = io.open(filename, "r")
@@ -14,6 +16,59 @@ local function read_json(filename)
 end
 
 local glyphnames = json.decode(read_json("glyphnames.json"))
+
+local function load_font_data(font)
+    local font_metadata_filename = 'neanes.metadata.json'
+
+    if font == 'Neanes' then
+        font_metadata_filename = "neanes.metadata.json"
+    elseif font == 'NeanesRTL' then
+        font_metadata_filename = "neanesrtl.metadata.json"
+    elseif font == 'NeanesStathisSeries' then
+        font_metadata_filename = "neanesstathisseries.metadata.json"
+    end
+
+    local font_metadata = json.decode(read_json(font_metadata_filename))
+
+    local glyph_name_to_codepoint_map = {}
+
+    for glyph, data in pairs(glyphnames) do
+        glyph_name_to_codepoint_map[glyph] = data.codepoint:sub(3)
+    end
+
+    for glyph, data in pairs(font_metadata.optionalGlyphs) do
+        glyph_name_to_codepoint_map[glyph] = data.codepoint:sub(3)
+    end
+
+    return {
+        glyph_name_to_codepoint_map = glyph_name_to_codepoint_map, 
+        font_metadata = font_metadata
+    }
+end
+
+local function set_neume_font(font)
+    neume_font = font
+
+    if neume_font_data_map[neume_font] == nil then
+        neume_font_data_map[neume_font] = load_font_data(neume_font)
+    end
+end 
+
+local function codepoint_from_glyph_name(glyph_name)
+    local data = neume_font_data_map[neume_font]
+
+    if data == nil then
+        tex.error("Font data has not been loaded yet. Did you forget to call \\byzsetneumefont?")
+    end
+
+    local codepoint = data.glyph_name_to_codepoint_map[glyph_name]
+
+    if codepoint == nil then
+        tex.error("Unknown glyph name: " .. glyph_name)
+    end
+
+    tex.sprint(data.glyph_name_to_codepoint_map[glyph_name])
+end
 
 local function get_mark_offset(base, mark, extra_offset)
     local mark_anchor_name = find_mark_anchor_name(base, mark)
@@ -535,27 +590,12 @@ local function include_score(filename, sectionName)
     end
 
     -- Load the font metadata
-    local font_metadata_filename = 'neanes.metadata.json'
-
-    if data.pageSetup.fontFamilies.neume == 'Neanes' then
-        font_metadata_filename = "neanes.metadata.json"
-    elseif data.pageSetup.fontFamilies.neume == 'NeanesRTL' then
-        font_metadata_filename = "neanesrtl.metadata.json"
-    elseif data.pageSetup.fontFamilies.neume == 'NeanesStathisSeries' then
-        font_metadata_filename = "neanesstathisseries.metadata.json"
+    if neume_font_data_map[data.pageSetup.fontFamilies.neume] == nil then
+        neume_font_data_map[data.pageSetup.fontFamilies.neume] = load_font_data(data.pageSetup.fontFamilies.neume)
     end
 
-    font_metadata = json.decode(read_json(font_metadata_filename))
-
-    glyphNameToCodepointMap = {}
-
-    for glyph, data in pairs(glyphnames) do
-        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
-    end
-
-    for glyph, data in pairs(font_metadata.optionalGlyphs) do
-        glyphNameToCodepointMap[glyph] = data.codepoint:sub(3)
-    end
+    glyphNameToCodepointMap = neume_font_data_map[data.pageSetup.fontFamilies.neume].glyph_name_to_codepoint_map
+    font_metadata = neume_font_data_map[data.pageSetup.fontFamilies.neume].font_metadata
 
     -- open a new section so that our variables do not persist forever
     tex.sprint('{')
@@ -619,4 +659,6 @@ local function include_score(filename, sectionName)
     tex.sprint("}")
 end
 
-neanestex.include_score = include_score
+neanestex.include_score             = include_score
+neanestex.codepoint_from_glyph_name = codepoint_from_glyph_name
+neanestex.set_neume_font            = set_neume_font
