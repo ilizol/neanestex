@@ -3521,6 +3521,7 @@
         "marginBottom": 0
       },
       {
+        "sectionName": "stasis-3",
         "elementType": "ModeKey",
         "templateId": 801,
         "alignment": "center",

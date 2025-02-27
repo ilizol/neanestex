@@ -1,6 +1,12 @@
 {
+  "appVersion": "0.4.74",
   "schemaVersion": 1,
   "sectionNames": [],
+  "fontVersions": {
+    "Neanes": "1.0.0",
+    "NeanesRTL": "1.0.0",
+    "NeanesStathisSeries": "1.0.0"
+  },
   "pageSetup": {
     "lineHeight": 54.72,
     "fontFamilies": {

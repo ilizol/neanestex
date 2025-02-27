@@ -1,10 +1,16 @@
 {
+  "appVersion": "0.4.74",
   "schemaVersion": 1,
   "sectionNames": [
     "stasis-1",
     "stasis-2",
     "stasis-3"
   ],
+  "fontVersions": {
+    "Neanes": "1.0.0",
+    "NeanesRTL": "1.0.0",
+    "NeanesStathisSeries": "1.0.0"
+  },
   "pageSetup": {
     "lineHeight": 54,
     "fontFamilies": {
