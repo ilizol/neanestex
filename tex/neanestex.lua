@@ -1,34 +1,38 @@
 neanestex = neanestex or {}
 local neanestex = neanestex
 
-local json = require "json"
+local lualibs = require("lualibs")
+local json = utilities.json
 local glyphNameToCodepointMap = {}
 local font_metadata = nil
 local neume_font_data_map = {}
-local neume_font = nil
+local neume_font_family = nil
+local neume_font_file_map = {}
+local neume_font_metadata_file_map = {}
+local neume_font_metadata_file_map_default = {
+    ["Neanes"] = "neanes.metadata.json",
+    ["NeanesRTL"] = "neanesrtl.metadata.json",
+    ["NeanesStathisSeries"] = "neanesstathisseries.metadata.json"
+}
 
 local function read_json(filename)
     local file = io.open(filename, "r")
-    if not file then return "{}" end
+    if not file then return tex.error("read_json: file not found " .. filename) end
     local content = file:read("*all")
     file:close()
     return content
 end
 
-local glyphnames = json.decode(read_json("glyphnames.json"))
+local glyphnames = json.tolua(read_json(kpse.find_file("glyphnames.json", "tex")))
 
 local function load_font_data(font)
-    local font_metadata_filename = 'neanes.metadata.json'
+    local font_metadata_filename = neume_font_metadata_file_map[font]
 
-    if font == 'Neanes' then
-        font_metadata_filename = "neanes.metadata.json"
-    elseif font == 'NeanesRTL' then
-        font_metadata_filename = "neanesrtl.metadata.json"
-    elseif font == 'NeanesStathisSeries' then
-        font_metadata_filename = "neanesstathisseries.metadata.json"
+    if font_metadata_filename == nil then
+        font_metadata_filename = neume_font_metadata_file_map_default[font]
     end
 
-    local font_metadata = json.decode(read_json(font_metadata_filename))
+    local font_metadata = json.tolua(read_json(font_metadata_filename))
 
     local glyph_name_to_codepoint_map = {}
 
@@ -46,16 +50,35 @@ local function load_font_data(font)
     }
 end
 
-local function set_neume_font(font)
-    neume_font = font
+local function set_neume_font_family(font_family)
+    neume_font_family = font_family
 
-    if neume_font_data_map[neume_font] == nil then
-        neume_font_data_map[neume_font] = load_font_data(neume_font)
+    if neume_font_data_map[neume_font_family] == nil then
+        neume_font_data_map[neume_font_family] = load_font_data(neume_font_family)
     end
 end 
 
+local function set_neume_font_file(font_family, filepath)
+    neume_font_file_map[font_family] = filepath
+end 
+
+local function set_neume_font_metadata_file(font_family, filepath)
+    neume_font_metadata_file_map[font_family] = filepath
+end 
+
+local function get_neume_font(font_family)
+    local result = neume_font_file_map[font_family]
+
+    if result == nil then
+        texio.write_nl("warning", "No neume font filepath was specified for ".. font_family ..". Attempting to use installed fonts.")
+        return font_family
+    else
+        return result
+    end
+end
+
 local function codepoint_from_glyph_name(glyph_name)
-    local data = neume_font_data_map[neume_font]
+    local data = neume_font_data_map[neume_font_family]
 
     if data == nil then
         tex.error("Font data has not been loaded yet. Did you forget to call \\byzsetneumefont?")
@@ -561,7 +584,7 @@ local function print_text_box(textBox, pageSetup)
 end
 
 local function include_score(filename, sectionName)
-    local data = json.decode(read_json(filename))
+    local data = json.tolua(read_json(filename))
 
     -- Find the section(s)
     local sections = {}
@@ -606,7 +629,7 @@ local function include_score(filename, sectionName)
     tex.sprint(string.format("\\setlength{\\byzdropcapsize}{%fbp}", data.pageSetup.fontSizes.dropCap))
     tex.sprint(string.format("\\setlength{\\byztextboxsize}{%fbp}", data.pageSetup.fontSizes.textBox))
     
-    tex.sprint(string.format("\\renewfontfamily{\\byzneumefont}{%s}", data.pageSetup.fontFamilies.neume))
+    tex.sprint(string.format("\\renewfontfamily{\\byzneumefont}{%s}", get_neume_font(data.pageSetup.fontFamilies.neume)))
     tex.sprint(string.format("\\renewfontfamily{\\byzlyricfont}{%s}", data.pageSetup.fontFamilies.lyrics))
     tex.sprint(string.format("\\renewfontfamily{\\byzdropcapfont}{%s}", data.pageSetup.fontFamilies.dropCap))
     tex.sprint(string.format("\\renewfontfamily{\\byztextboxfont}{%s}", data.pageSetup.fontFamilies.textBox))
@@ -659,6 +682,8 @@ local function include_score(filename, sectionName)
     tex.sprint("}")
 end
 
-neanestex.include_score             = include_score
-neanestex.codepoint_from_glyph_name = codepoint_from_glyph_name
-neanestex.set_neume_font            = set_neume_font
+neanestex.include_score                      = include_score
+neanestex.codepoint_from_glyph_name          = codepoint_from_glyph_name
+neanestex.set_neume_font_family              = set_neume_font_family
+neanestex.set_neume_font_file                = set_neume_font_file
+neanestex.set_neume_font_metadata_file       = set_neume_font_metadata_file

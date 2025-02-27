@@ -9,14 +9,19 @@
 \usepackage{blindtext}
 
 % Select the neume font for modekeys and other glyphs outside the score
-\byzsetneumefont{Neanes}
+\byzsetneumefontfamily{Neanes}
+
+% Set the precise paths to the neume font and metadata
+% Using a specific file helps with backwards compatibility.
+\byzsetneumefontfile{Neanes}{Neanes.otf}
+\byzsetneumefontmetadatafile{Neanes}{neanes.metadata.json}
 
 % Prints a modekey with the greek "echos"
 \newenvironment{modekey}{%
     \begin{center}%
         \color[HTML]{800000}%
         \fontsize{20bp}{\baselineskip}%
-        \fontspec{Neanes}
+        \fontspec{Neanes.otf}
         \byzglyph{modeWordEchos}%
 }%
 {%

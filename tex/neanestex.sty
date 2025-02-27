@@ -13,7 +13,7 @@
 \newfontfamily\byztextboxfont{Source Serif 4}
 
 \begin{luacode*}
-    dofile("neanestex.lua")
+    dofile(kpse.find_file("neanestex.lua", "tex"))
 \end{luacode*}
 
 % Font sizes
@@ -61,9 +61,20 @@
 % Set the neume font used for commands like \byzcodepoint and \byzglyph.
 % Note that \neanesscore will not use this value, but rather the values
 % found in the file's page setup.
-\newcommand{\byzsetneumefont}[1]{% #1 = fontname
-    \directlua{neanestex.set_neume_font("#1")}%
+\newcommand{\byzsetneumefontfamily}[1]{% #1 = fontfamily
+    \directlua{neanestex.set_neume_font_family("#1")}%
 }
+
+% Set the neume font file
+\newcommand{\byzsetneumefontfile}[2]{% #1 = fontfamily, #1 = filepath
+    \directlua{neanestex.set_neume_font_file("#1", "#2")}%
+}
+
+% Set the neume font metadata file
+\newcommand{\byzsetneumefontmetadatafile}[2]{% #1 = fontfamily, #1 = filepath
+    \directlua{neanestex.set_neume_font_metadata_file("#1", "#2")}%
+}
+
 
 % Gets the codepoint for a glyph
 \newcommand{\byzcodepoint}[1]{% #1 = glyphname
