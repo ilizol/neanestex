@@ -21,6 +21,12 @@ Specify the font and metadata files in your document the following.
 
 In Neanes, export your scores by choosing `File -> Export As -> Export as Latex` in the file menu. Save the exported `.byztex` files in the same directory as your TeX document.
 
+Insert the score into the document via the following command.
+
+```latex
+\neanesscore{olihc-1.byztex}{}
+```
+
 Generate a PDF with `lualautex my-doc.tex`.
 
 > [!TIP]
