@@ -1,0 +1,1053 @@
+{
+  "appVersion": "0.4.74",
+  "schemaVersion": 1,
+  "sectionNames": [],
+  "fontVersions": {
+    "Neanes": "1.0.0",
+    "NeanesRTL": "1.0.0",
+    "NeanesStathisSeries": "1.0.0"
+  },
+  "pageSetup": {
+    "lineHeight": 54.72,
+    "fontFamilies": {
+      "dropCap": "PFGoudy Initials",
+      "lyrics": "Source Serif 4",
+      "neume": "Neanes",
+      "textBox": "Source Serif 4"
+    },
+    "fontSizes": {
+      "dropCap": 60,
+      "lyrics": 12,
+      "modeKey": 20,
+      "neume": 20,
+      "textBox": 20
+    },
+    "lyricsVerticalOffset": -18.6,
+    "lyricsMelismaSpacing": 1.8,
+    "lyricsMelismaThickness": 0.75,
+    "colors": {
+      "accidental": "800000",
+      "dropCap": "800000",
+      "fthora": "800000",
+      "gorgon": "800000",
+      "heteron": "800000",
+      "ison": "800000",
+      "koronis": "800000",
+      "lyrics": "000000",
+      "martyria": "800000",
+      "measureBar": "800000",
+      "measureNumber": "000000",
+      "modeKey": "800000",
+      "neume": "000000",
+      "noteIndicator": "800000",
+      "tempo": "800000",
+      "textBox": "000000"
+    }
+  },
+  "sections": [
+    {
+      "default": true,
+      "lines": [
+        {
+          "elements": [
+            {
+              "type": "dropcap",
+              "x": 0,
+              "width": 53.04,
+              "verticalAdjustment": -6,
+              "content": "L"
+            },
+            {
+              "type": "note",
+              "x": 56.7731,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "gorgon": "gorgonAbove",
+              "ison": "isonIndicatorPa",
+              "melismaWidth": 21.4619,
+              "lyrics": "ord,"
+            },
+            {
+              "type": "note",
+              "x": 89.7989,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 107.5884,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "lyrics": "I"
+            },
+            {
+              "type": "note",
+              "x": 125.378,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "lyrics": "have"
+            },
+            {
+              "type": "note",
+              "x": 159.4035,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "vocalExpression": "psifiston",
+              "melismaWidth": 19.2198,
+              "lyrics": "cried"
+            },
+            {
+              "type": "note",
+              "x": 193.429,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 211.2186,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "apli",
+              "vocalExpression": "antikenoma",
+              "ison": "isonIndicatorUnison",
+              "melismaWidth": 41.9807,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                19.1183
+              ],
+              "lyrics": "un",
+              "lyricsLeftAlign": true
+            },
+            {
+              "type": "note",
+              "x": 229.0082,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 246.7977,
+              "width": 41.1497,
+              "quantitativeNeume": "ison",
+              "vareia": true,
+              "melismaWidth": 61.8073,
+              "lyrics": "to",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 291.6805,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 309.4701,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon"
+            },
+            {
+              "type": "note",
+              "x": 343.4956,
+              "width": 27.3332,
+              "quantitativeNeume": "petastiOligon",
+              "measureNumber": "measureNumber4",
+              "melismaWidth": 15.0628,
+              "lyrics": "Thee,",
+              "lyricsLeftAlign": true
+            },
+            {
+              "type": "note",
+              "x": 374.5618,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "klasmaAbove"
+            },
+            {
+              "type": "note",
+              "x": 392.3514,
+              "width": 12.1969,
+              "quantitativeNeume": "leimma1"
+            },
+            {
+              "type": "martyria",
+              "x": 408.2815,
+              "width": 18.8953,
+              "note": "martyriaNotePa",
+              "rootSign": "martyriaAlphaBelow",
+              "measureBarRight": "barlineSingle"
+            },
+            {
+              "type": "note",
+              "x": 437.7076,
+              "width": 30.2924,
+              "quantitativeNeume": "oligonKentimaAbove",
+              "time": "klasmaBelow",
+              "ison": "isonIndicatorPa",
+              "melismaWidth": 6.54,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                1.398
+              ],
+              "lyrics": "heark"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "note",
+              "x": 0,
+              "width": 32.5319,
+              "quantitativeNeume": "oligonApostrofosKentimata",
+              "lyrics": "en"
+            },
+            {
+              "type": "note",
+              "x": 36.0595,
+              "width": 32.5319,
+              "quantitativeNeume": "oligonApostrofosKentimata",
+              "gorgon": "gorgonAbove",
+              "melismaWidth": 47.604,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                21.93
+              ],
+              "lyrics": "un"
+            },
+            {
+              "type": "note",
+              "x": 72.119,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 89.7031,
+              "width": 35.0312,
+              "quantitativeNeume": "runningElafron",
+              "melismaWidth": 58.587,
+              "lyrics": "to",
+              "lyricsHorizontalOffset": 10.1775
+            },
+            {
+              "type": "note",
+              "x": 128.2619,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "gorgon": "gorgonAbove",
+              "vocalExpression": "antikenoma"
+            },
+            {
+              "type": "note",
+              "x": 162.082,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 179.6661,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "time": "klasmaAbove",
+              "lyrics": "me;"
+            },
+            {
+              "type": "martyria",
+              "x": 213.6661,
+              "width": 14.7363,
+              "note": "martyriaNotePa",
+              "rootSign": "martyriaAlphaBelow"
+            },
+            {
+              "type": "note",
+              "x": 235.9385,
+              "width": 35.871,
+              "quantitativeNeume": "oligonKentimaMiddle",
+              "melismaWidth": 55.8075,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                26.0318
+              ],
+              "lyrics": "heark"
+            },
+            {
+              "type": "note",
+              "x": 275.3372,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "vocalExpression": "psifiston",
+              "accidental": "yfesis2"
+            },
+            {
+              "type": "note",
+              "x": 309.1572,
+              "width": 35.0312,
+              "quantitativeNeume": "runningElafron",
+              "melismaWidth": 23.315,
+              "lyrics": "en",
+              "lyricsHorizontalOffset": 10.1775
+            },
+            {
+              "type": "note",
+              "x": 347.7161,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "apli",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 365.3002,
+              "width": 39.2702,
+              "quantitativeNeume": "oligonIsonKentimata",
+              "gorgon": "gorgonAbove",
+              "melismaWidth": 46.0744,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                21.1652
+              ],
+              "lyrics": "un"
+            },
+            {
+              "type": "note",
+              "x": 408.098,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 425.6821,
+              "width": 24.7338,
+              "quantitativeNeume": "apostrofos",
+              "vareia": true,
+              "ison": "isonIndicatorUnison",
+              "melismaWidth": 19.3684,
+              "lyrics": "to",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 453.9435,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "note",
+              "x": 0,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "melismaWidth": 71.4556,
+              "lyrics": "me,"
+            },
+            {
+              "type": "note",
+              "x": 33.7276,
+              "width": 30.2924,
+              "quantitativeNeume": "oligonKentimataBelow",
+              "ison": "isonIndicatorPa"
+            },
+            {
+              "type": "note",
+              "x": 67.4552,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 100.183,
+              "width": 24.7338,
+              "quantitativeNeume": "apostrofos",
+              "vareia": true,
+              "time": "klasmaAbove",
+              "melismaWidth": 65.4386,
+              "lyrics": "O",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 128.352,
+              "width": 7.998,
+              "quantitativeNeume": "yporroi",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 139.7851,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "gorgon": "gorgonAbove",
+              "vocalExpression": "antikenoma"
+            },
+            {
+              "type": "note",
+              "x": 173.5127,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 191.0044,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "time": "klasmaAbove",
+              "lyrics": "Lord."
+            },
+            {
+              "type": "martyria",
+              "x": 224.9119,
+              "width": 14.7363,
+              "note": "martyriaNotePa",
+              "rootSign": "martyriaAlphaBelow"
+            },
+            {
+              "type": "note",
+              "x": 246.0434,
+              "width": 40.9697,
+              "quantitativeNeume": "oligonKentimaAbove",
+              "vareia": true,
+              "vocalExpression": "omalonConnecting",
+              "melismaWidth": 34.5038,
+              "lyrics": "Lord,",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 290.4483,
+              "width": 30.4724,
+              "quantitativeNeume": "ison"
+            },
+            {
+              "type": "note",
+              "x": 324.3558,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "lyrics": "I"
+            },
+            {
+              "type": "note",
+              "x": 341.8475,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "lyrics": "have"
+            },
+            {
+              "type": "note",
+              "x": 375.5751,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "vocalExpression": "psifiston",
+              "accidental": "yfesis4",
+              "melismaWidth": 35.9136,
+              "lyrics": "cried"
+            },
+            {
+              "type": "note",
+              "x": 408.3029,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 425.7945,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 443.2862,
+              "width": 24.7138,
+              "quantitativeNeume": "petastiApostrofos",
+              "time": "klasmaBelow",
+              "melismaWidth": 6.54,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                1.398
+              ],
+              "lyrics": "un"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "note",
+              "x": 0,
+              "width": 35.0312,
+              "quantitativeNeume": "runningElafron",
+              "melismaWidth": 23.6819,
+              "lyrics": "to",
+              "lyricsHorizontalOffset": 10.1775
+            },
+            {
+              "type": "note",
+              "x": 37.7026,
+              "width": 14.7563,
+              "quantitativeNeume": "kentimata"
+            },
+            {
+              "type": "note",
+              "x": 55.1303,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "gorgon": "gorgonAbove",
+              "measureNumber": "measureNumber4",
+              "melismaWidth": 15.9606,
+              "lyrics": "Thee,",
+              "lyricsLeftAlign": true
+            },
+            {
+              "type": "note",
+              "x": 87.0943,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "klasmaAbove"
+            },
+            {
+              "type": "note",
+              "x": 103.8222,
+              "width": 12.1969,
+              "quantitativeNeume": "leimma1"
+            },
+            {
+              "type": "martyria",
+              "x": 118.6905,
+              "width": 17.9955,
+              "note": "martyriaNoteGa",
+              "rootSign": "martyriaNanaBelow",
+              "measureBarRight": "barlineSingle"
+            },
+            {
+              "type": "note",
+              "x": 142.3173,
+              "width": 39.2702,
+              "quantitativeNeume": "oligonIsonKentimata",
+              "vocalExpression": "psifiston",
+              "melismaWidth": 7.8554,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                2.0557
+              ],
+              "lyrics": "heark"
+            },
+            {
+              "type": "note",
+              "x": 184.8595,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "melismaWidth": 16.0257,
+              "lyrics": "en"
+            },
+            {
+              "type": "note",
+              "x": 201.5873,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 218.3152,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "klasmaAbove",
+              "melismaWidth": 7.8554,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                2.0557
+              ],
+              "lyrics": "un"
+            },
+            {
+              "type": "note",
+              "x": 238.5485,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "apli",
+              "vocalExpression": "antikenoma",
+              "ison": "isonIndicatorUnison",
+              "melismaWidth": 18.5121,
+              "lyrics": "to"
+            },
+            {
+              "type": "note",
+              "x": 255.2764,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 272.0042,
+              "width": 40.9697,
+              "quantitativeNeume": "oligon",
+              "vareia": true,
+              "measureNumber": "measureNumber4",
+              "melismaWidth": 48.5134,
+              "lyrics": "me;",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 315.6453,
+              "width": 7.998,
+              "quantitativeNeume": "yporroi",
+              "gorgon": "digorgon"
+            },
+            {
+              "type": "note",
+              "x": 326.3147,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "time": "klasmaAbove"
+            },
+            {
+              "type": "martyria",
+              "x": 359.2785,
+              "width": 15.6561,
+              "note": "martyriaNoteZo",
+              "rootSign": "martyriaZoBelow"
+            },
+            {
+              "type": "note",
+              "x": 380.5659,
+              "width": 40.03,
+              "quantitativeNeume": "oligonKentimaMiddle",
+              "ison": "isonIndicatorPa",
+              "measureBarRight": "barlineSingle",
+              "melismaWidth": 23.3618,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                9.8089
+              ],
+              "lyrics": "at",
+              "lyricsHorizontalOffset": -4.159
+            },
+            {
+              "type": "note",
+              "x": 426.5583,
+              "width": 24.7138,
+              "quantitativeNeume": "petastiKentima",
+              "time": "klasmaBelow",
+              "lyrics": "tend"
+            },
+            {
+              "type": "note",
+              "x": 453.9435,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "lyrics": "to"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "note",
+              "x": 1.5878,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "lyrics": "the"
+            },
+            {
+              "type": "note",
+              "x": 21.658,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "melismaWidth": 65.9699,
+              "lyrics": "voice"
+            },
+            {
+              "type": "note",
+              "x": 56.1027,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "vocalExpression": "psifiston"
+            },
+            {
+              "type": "note",
+              "x": 90.5474,
+              "width": 7.998,
+              "quantitativeNeume": "yporroi",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 102.6977,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 120.9064,
+              "width": 24.7338,
+              "quantitativeNeume": "apostrofos",
+              "vareia": true,
+              "ison": "isonIndicatorUnison",
+              "melismaWidth": 54.2637,
+              "lyrics": "of",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 149.7925,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 168.0012,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon"
+            },
+            {
+              "type": "note",
+              "x": 202.4459,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "time": "klasmaAbove",
+              "lyrics": "my"
+            },
+            {
+              "type": "note",
+              "x": 236.8906,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "gorgon": "gorgonAbove",
+              "ison": "isonIndicatorPa",
+              "melismaWidth": 35.0997,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                15.6779
+              ],
+              "lyrics": "sup"
+            },
+            {
+              "type": "note",
+              "x": 270.3356,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 288.5443,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "melismaWidth": 23.5082,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                9.8821
+              ],
+              "lyrics": "pli"
+            },
+            {
+              "type": "note",
+              "x": 321.9893,
+              "width": 24.7338,
+              "quantitativeNeume": "apostrofos",
+              "vareia": true,
+              "time": "klasmaAbove",
+              "melismaWidth": 74.5704,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                35.4132
+              ],
+              "lyrics": "ca",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 350.8753,
+              "width": 7.998,
+              "quantitativeNeume": "yporroi",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 363.0256,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "gorgon": "gorgonAbove",
+              "vocalExpression": "antikenoma"
+            },
+            {
+              "type": "note",
+              "x": 397.4703,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 415.679,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "time": "klasmaAbove",
+              "lyrics": "tion"
+            },
+            {
+              "type": "martyria",
+              "x": 450.3037,
+              "width": 14.7363,
+              "note": "martyriaNotePa",
+              "rootSign": "martyriaAlphaBelow"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "note",
+              "x": 0,
+              "width": 35.871,
+              "quantitativeNeume": "oligonKentimaMiddle",
+              "ison": "isonIndicatorGa",
+              "lyrics": "when"
+            },
+            {
+              "type": "note",
+              "x": 39.5518,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "lyrics": "I"
+            },
+            {
+              "type": "note",
+              "x": 73.705,
+              "width": 30.2924,
+              "quantitativeNeume": "oligonYpsiliRight",
+              "vocalExpression": "psifiston",
+              "melismaWidth": 24.2605,
+              "lyrics": "cry"
+            },
+            {
+              "type": "note",
+              "x": 107.6782,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 125.4155,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "klasmaAbove",
+              "melismaWidth": 8.8648,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                2.5604
+              ],
+              "lyrics": "un"
+            },
+            {
+              "type": "note",
+              "x": 146.6582,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "apli",
+              "vocalExpression": "antikenoma",
+              "ison": "isonIndicatorPa",
+              "melismaWidth": 19.5215,
+              "lyrics": "to"
+            },
+            {
+              "type": "note",
+              "x": 164.3955,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 182.1328,
+              "width": 40.9697,
+              "quantitativeNeume": "oligonKentimaBelow",
+              "vareia": true,
+              "melismaWidth": 80.1192,
+              "lyrics": "Thee:",
+              "lyricsLeftAlign": true,
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 226.7833,
+              "width": 7.998,
+              "quantitativeNeume": "yporroi",
+              "gorgon": "trigorgon"
+            },
+            {
+              "type": "note",
+              "x": 238.4621,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 256.1994,
+              "width": 29.2927,
+              "quantitativeNeume": "oligonKentimataAbove",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 289.1728,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "time": "klasmaAbove"
+            },
+            {
+              "type": "martyria",
+              "x": 306.9101,
+              "width": 13.8365,
+              "note": "martyriaNoteGa",
+              "rootSign": "martyriaNanaBelow"
+            },
+            {
+              "type": "note",
+              "x": 330.9874,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "melismaWidth": 28.3585,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                12.3073
+              ],
+              "lyrics": "Heark",
+              "lyricsLeftAlign": true
+            },
+            {
+              "type": "note",
+              "x": 365.1406,
+              "width": 14.7563,
+              "quantitativeNeume": "kentimata"
+            },
+            {
+              "type": "note",
+              "x": 383.5777,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "time": "klasmaAbove",
+              "lyrics": "en"
+            },
+            {
+              "type": "note",
+              "x": 417.7309,
+              "width": 32.5319,
+              "quantitativeNeume": "oligonApostrofosKentimata",
+              "gorgon": "gorgonAbove",
+              "melismaWidth": 26.8692,
+              "isHyphen": true,
+              "hyphenOffsets": [
+                11.5626
+              ],
+              "lyrics": "un"
+            },
+            {
+              "type": "note",
+              "x": 453.9435,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "note",
+              "x": 0,
+              "width": 35.0312,
+              "quantitativeNeume": "runningElafron",
+              "time": "klasmaAbove",
+              "lyrics": "to",
+              "lyricsHorizontalOffset": 10.1775
+            },
+            {
+              "type": "note",
+              "x": 37.1912,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "ison": "isonIndicatorNi",
+              "melismaWidth": 65.1468,
+              "lyrics": "me,"
+            },
+            {
+              "type": "note",
+              "x": 69.6437,
+              "width": 14.7563,
+              "quantitativeNeume": "kentimata"
+            },
+            {
+              "type": "note",
+              "x": 86.56,
+              "width": 24.8538,
+              "quantitativeNeume": "petasti",
+              "time": "klasmaBelow",
+              "vocalExpression": "psifiston"
+            },
+            {
+              "type": "note",
+              "x": 113.5737,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 129.7902,
+              "width": 41.1497,
+              "quantitativeNeume": "ison",
+              "vareia": true,
+              "time": "klasmaAbove",
+              "ison": "isonIndicatorPa",
+              "melismaWidth": 69.8211,
+              "lyrics": "O",
+              "lyricsHorizontalOffset": 10.6773
+            },
+            {
+              "type": "note",
+              "x": 173.0999,
+              "width": 7.998,
+              "quantitativeNeume": "yporroi",
+              "gorgon": "gorgonAbove"
+            },
+            {
+              "type": "note",
+              "x": 183.2579,
+              "width": 30.2924,
+              "quantitativeNeume": "oligon",
+              "gorgon": "gorgonAbove",
+              "vocalExpression": "antikenoma"
+            },
+            {
+              "type": "note",
+              "x": 215.7103,
+              "width": 14.0565,
+              "quantitativeNeume": "apostrofos"
+            },
+            {
+              "type": "note",
+              "x": 231.9268,
+              "width": 30.4724,
+              "quantitativeNeume": "ison",
+              "time": "dipli",
+              "lyrics": "Lord."
+            },
+            {
+              "type": "martyria",
+              "x": 450.3037,
+              "width": 14.7363,
+              "note": "martyriaNotePa",
+              "rootSign": "martyriaAlphaBelow"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
