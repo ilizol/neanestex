@@ -1,6 +1,17 @@
 neanestex = neanestex or {}
 local neanestex = neanestex
 
+local err, warn, info, log = luatexbase.provides_module({
+    name        = "neanestex",
+    date        = "2025/02/27",
+    version     = "1.0.0",
+    description = "A package for inserting Byzantine Chant scores into LaTeX.",
+    author      = "danielgarthur",
+    license     = "GPL-3.0"
+})
+
+local schema_version = 1
+
 local lualibs = require("lualibs")
 local json = utilities.json
 local glyphNameToCodepointMap = {}
@@ -17,7 +28,7 @@ local neume_font_metadata_file_map_default = {
 
 local function read_json(filename)
     local file = io.open(filename, "r")
-    if not file then return tex.error("read_json: file not found " .. filename) end
+    if not file then return err("read_json: file not found " .. filename) end
     local content = file:read("*all")
     file:close()
     return content
@@ -70,7 +81,7 @@ local function get_neume_font(font_family)
     local result = neume_font_file_map[font_family]
 
     if result == nil then
-        texio.write_nl("warning", "No neume font filepath was specified for ".. font_family ..". Attempting to use installed fonts.")
+        warn("No neume font filepath was specified for ".. font_family ..". Attempting to use installed fonts.")
         return font_family
     else
         return result
@@ -81,13 +92,13 @@ local function codepoint_from_glyph_name(glyph_name)
     local data = neume_font_data_map[neume_font_family]
 
     if data == nil then
-        tex.error("Font data has not been loaded yet. Did you forget to call \\byzsetneumefont?")
+        err("Font data has not been loaded yet. Did you forget to call \\byzsetneumefont?")
     end
 
     local codepoint = data.glyph_name_to_codepoint_map[glyph_name]
 
     if codepoint == nil then
-        tex.error("Unknown glyph name: " .. glyph_name)
+        err("Unknown glyph name: " .. glyph_name)
     end
 
     tex.sprint(data.glyph_name_to_codepoint_map[glyph_name])
@@ -97,7 +108,7 @@ local function get_mark_offset(base, mark, extra_offset)
     local mark_anchor_name = find_mark_anchor_name(base, mark)
 
     if mark_anchor_name == nil then
-      texio.write_nl("warning", "Missing anchor for base: " .. base ..  "mark: " .. mark)
+      warn("Missing anchor for base: " .. base ..  "mark: " .. mark)
       return { x = 0, y = 0 }
     end
 
@@ -586,6 +597,10 @@ end
 local function include_score(filename, sectionName)
     local data = json.tolua(read_json(filename))
 
+    if schema_version < data.schemaVersion then
+        warn(string.format("The score %s uses schema version %d. This version of neanestex only supports schema versions <= %d", filename, data.schemaVersion, schema_version))
+    end
+
     -- Find the section(s)
     local sections = {}
 
@@ -602,11 +617,11 @@ local function include_score(filename, sectionName)
         end
 
         if section == nil and sectionName == nil then 
-            tex.error("Could not find default section")
+            err("Could not find default section")
         end
 
         if section == nil then 
-            tex.error("Could not find section " .. sectionName)
+            err("Could not find section " .. sectionName)
         end
 
         sections[1] = section
@@ -625,7 +640,7 @@ local function include_score(filename, sectionName)
     local score_font_version = data.fontVersions[data.pageSetup.fontFamilies.neume]
 
     if metadata_font_version and score_font_version and metadata_font_version ~= score_font_version then
-        texio.write_nl("warning", string.format("The font version in the metadata (%s) does not match the font version in the score (%s)", metadata_font_version, score_font_version))
+        warn(string.format("The font version in the metadata (%s) does not match the font version in the score (%s)", metadata_font_version, score_font_version))
     end
 
     -- Check that the OTF file version matches the score's font version
@@ -636,7 +651,7 @@ local function include_score(filename, sectionName)
         
         if otf_font_data and score_font_version then
             if otf_font_data.version and otf_font_data.version ~= score_font_version then
-                texio.write_nl("warning", string.format("The font version (%s) does not match the font version in the score (%s)", otf_font_data.version, score_font_version))
+                warn(string.format("The font version (%s) does not match the font version in the score (%s)", otf_font_data.version, score_font_version))
             end
             fontloader.close(otf_font_data)
 
