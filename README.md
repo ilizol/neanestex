@@ -10,6 +10,15 @@ Create a TeX document. See the `examples/` directory for a starting point.
 
 Either copy the contents of `tex/` to your TeX Live local packages folder, or copy the contents to the same location as your TeX document.
 
+Download the neume fonts and metadata JSON files from the [Neanes repository](https://github.com/neanes/neanes/tree/master/src/assets/fonts) and place them in the same location as your TeX document. Also download and install any additional text fonts that you want to use from the repository and install them in your operating system, or in TeX Live.
+
+Specify the font and metadata files in your document the following.
+
+```latex
+\byzsetneumefontfile{Neanes}{Neanes.otf}
+\byzsetneumefontmetadatafile{Neanes}{neanes.metadata.json}
+```
+
 In Neanes, export your scores by choosing `File -> Export As -> Export as Latex` in the file menu. Save the exported `.byztex` files in the same directory as your TeX document.
 
 Generate a PDF with `lualautex my-doc.tex`.
@@ -19,9 +28,13 @@ Generate a PDF with `lualautex my-doc.tex`.
 
 ## Finer Points
 
+### Supported Score Elements
+
 When exporting a score from Neanes, mode keys and text boxes are not exported by default, although you can choose to do so. However, it is recommended that you instead use LaTeX to create your own text boxes and mode key signatures.
 
 Rich text boxes and images do not currently export. This will probably not be included in this package since LaTeX handles rich text and images better than Neanes. Also note that text boxes with multiple blank lines will not export properly.
+
+### Score Sections
 
 In order to insert a larger score into your document that contains many text breaks between parts, you may either create multiple Neanes files and insert each one at the correct location, or you may use a single file and assign section names in Neanes. To assign a section name, click an element such as a mode key, text box, or neume and enter a section name in the bottom toolbar.
 
