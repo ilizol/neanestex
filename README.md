@@ -24,7 +24,7 @@ In Neanes, export your scores by choosing `File -> Export As -> Export as Latex`
 Insert the score into the document via the following command.
 
 ```latex
-\neanesscore{olihc-1.byztex}{}
+\neanesscore{my-score.byztex}{}
 ```
 
 Generate a PDF with `lualautex my-doc.tex`.
