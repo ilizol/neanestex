@@ -620,11 +620,27 @@ local function include_score(filename, sectionName)
     glyphNameToCodepointMap = neume_font_data_map[data.pageSetup.fontFamilies.neume].glyph_name_to_codepoint_map
     font_metadata = neume_font_data_map[data.pageSetup.fontFamilies.neume].font_metadata
 
+    -- Check that the metadata version matches the score's font version
     local metadata_font_version = font_metadata.fontVersion
     local score_font_version = data.fontVersions[data.pageSetup.fontFamilies.neume]
 
-    if metadata_font_version ~= nil and score_font_version ~= nil and metadata_font_version ~= score_font_version then
+    if metadata_font_version and score_font_version and metadata_font_version ~= score_font_version then
         texio.write_nl("warning", string.format("The font version in the metadata (%s) does not match the font version in the score (%s)", metadata_font_version, score_font_version))
+    end
+
+    -- Check that the OTF file version matches the score's font version
+    local otf_font_file = neume_font_file_map[data.pageSetup.fontFamilies.neume]
+    
+    if otf_font_file then
+        local otf_font_data = fontloader.open(neume_font_file_map[data.pageSetup.fontFamilies.neume])
+        
+        if otf_font_data and score_font_version then
+            if otf_font_data.version and otf_font_data.version ~= score_font_version then
+                texio.write_nl("warning", string.format("The font version (%s) does not match the font version in the score (%s)", otf_font_data.version, score_font_version))
+            end
+            fontloader.close(otf_font_data)
+
+        end
     end
 
     -- open a new section so that our variables do not persist forever
