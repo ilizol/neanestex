@@ -1,6 +1,6 @@
 # NeanesTeX
 
-NeanesTeX is a LuaLaTeX package that allows a Byzantine Chant score designed in [Neanes](https://github.com/neanes/neanes) to be inserted into a LaTeX document.
+NeanesTeX is a LuaLaTeX package that allows Byzantine Chant scores designed in [Neanes](https://github.com/neanes/neanes) to be inserted into a LaTeX document.
 
 ## Basic Usage
 
