@@ -12,10 +12,10 @@ Either copy the contents of `tex/` to your TeX Live local packages folder, or co
 
 In Neanes, export your scores by choosing `File -> Export As -> Export as Latex` in the file menu. Save the exported `.byztex` files in the same directory as your TeX document.
 
+Generate a PDF with `lualautex my-doc.tex`.
+
 > [!TIP]
 > Files can be exported on the command line or in a batch/shell script by launching Neanes with the `--silent-latex` option followed by a list of files to export.
-
-Generate a PDF with `lualautex my-doc.tex`.
 
 ## Finer Points
 
