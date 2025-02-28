@@ -1,0 +1,30 @@
+# NeanesTeX
+
+NeanesTeX is a LuaLaTeX package that allows a Byzantine Chant score designed in [Neanes](https://github.com/neanes/neanes) to be inserted into a LaTeX document.
+
+## Basic Usage
+
+Install [TeX Live](https://www.tug.org/texlive/).
+
+Create a TeX document. See the `examples/` directory for a starting point.
+
+Either copy the contents of `tex/` to your TeX Live local packages folder, or copy the contents to the same location as your TeX document.
+
+In Neanes, export your scores by choosing `File -> Export As -> Export as Latex` in the file menu. Save the exported `.byztex` files in the same directory as your TeX document.
+
+> [!TIP]
+> Files can be exported on the command line or in a batch/shell script by launching Neanes with the `--silent-latex` option followed by a list of files to export.
+
+Generate a PDF with `lualautex my-doc.tex`.
+
+## Finer Points
+
+When exporting a score from Neanes, mode keys and text boxes are not exported by default, although you can choose to do so. However, it is recommended that you instead use LaTeX to create your own text boxes and mode key signatures.
+
+Rich text boxes and images do not currently export. This will probably not be included in this package since LaTeX handles rich text and images better than Neanes. Also note that text boxes with multiple blank lines will not export properly.
+
+In order to insert a larger score into your document that contains many text breaks between parts, you may either create multiple Neanes files and insert each one at the correct location, or you may use a single file and assign section names in Neanes. To assign a section name, click an element such as a mode key, text box, or neume and enter a section name in the bottom toolbar.
+
+You can then insert a single section of a larger score into your document via `\neanesscore{score.byztex}{section_name}`.
+
+Be aware that you should not put more than one section name on the same line. Also note that you may place a section name on a mode key or text box even if you choose not to export those elements. The exported file will still correctly generate the sections.
