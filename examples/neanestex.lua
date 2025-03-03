@@ -21,6 +21,7 @@ local neume_font_family = nil
 local neume_font_file_map = {}
 local neume_font_metadata_file_map = {}
 local neume_font_metadata_file_map_default = {
+    ["Almouzios"] = "almouzios.metadata.json",
     ["Neanes"] = "neanes.metadata.json",
     ["NeanesRTL"] = "neanesrtl.metadata.json",
     ["NeanesStathisSeries"] = "neanesstathisseries.metadata.json"
