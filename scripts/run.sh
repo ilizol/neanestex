@@ -5,5 +5,10 @@
 # cp -f ~/Projects/neanes-examples/kontakion_prophet_elias/kontakion_prophet_elias_almouzios.byzx ~/Projects/neanestex/examples/kontakion_prophet_elias_almouzios.byzx
 # cp -f ~/Projects/neanes-examples/kontakion_prophet_elias/kontakion_prophet_elias_almouzios.byztex ~/Projects/neanestex/examples/kontakion_prophet_elias_almouzios.byztex
 
+# LaTeX package (neanestex.sty)
+# sudo cp ~/Projects/neanestex/tex/* /usr/share/texlive/texmf-dist/tex/neanestex/
+# sudo mktexlsr
+
 # neanestex (lualatex)
-lualatex kontakion_prophet_elias_almouzios.tex
+lualatex ~/Projects/neanestex/examples/kontakion_prophet_elias_almouzios.tex
+# lualatex kontakion_prophet_elias_almouzios.tex
