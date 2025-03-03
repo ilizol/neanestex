@@ -10,5 +10,5 @@
 # sudo mktexlsr
 
 # neanestex (lualatex)
-lualatex ~/Projects/neanestex/examples/kontakion_prophet_elias_almouzios.tex
-# lualatex kontakion_prophet_elias_almouzios.tex
+# lualatex ~/Projects/neanestex/examples/kontakion_prophet_elias_almouzios.tex
+lualatex kontakion_prophet_elias_almouzios.tex
