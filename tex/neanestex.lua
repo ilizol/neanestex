@@ -341,7 +341,7 @@ local function print_note(note, pageSetup)
         if note.lyricsHorizontalOffset then offset = note.lyricsHorizontalOffset end
 
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - offset))    
-        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, note.width - offset, lyricPos, fontSize, lyrics))
+        tex.sprint(string.format("\\raisebox{%fbp}{%s{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, color, note.width - offset, lyricPos, fontSize, lyrics))
 
         -- Melismas
         if note.melismaWidth and note.melismaWidth > 0 then
@@ -354,8 +354,8 @@ local function print_note(note, pageSetup)
             end
         end
 
-        -- close \raisebox{\makebox{}}
-        tex.sprint("}}")
+        -- close \raisebox{\makebox{\textcolor{}}}
+        tex.sprint("}}}")
     elseif note.isFullMelisma then
         tex.sprint(string.format("\\hspace{-%fbp}", note.width))    
         tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][l]{", pageSetup.lyricsVerticalOffset, note.width))
