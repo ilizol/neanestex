@@ -27,7 +27,7 @@ Insert the score into the document.
 \neanesscore{my-score.byztex}{}
 ```
 
-Generate a PDF with `lualautex my-doc.tex`.
+Generate a PDF with `lualatex my-doc.tex`.
 
 > [!TIP]
 > Files can be exported on the command line or in a batch/shell script by launching Neanes with the `--silent-latex` option followed by a list of files to export.
