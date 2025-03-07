@@ -1,3 +1,4 @@
 *.aux
 *.log
 example1.pdf
+examples/build.sh

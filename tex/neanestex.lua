@@ -381,7 +381,14 @@ end
 
 local function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
-    tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
+    tex.sprint(string.format("\\hspace{%fbp}", martyria.x))
+
+    local verticalOffset = (pageSetup.martyriaVerticalOffset or 0) + (martyria.verticalOffset or 0)
+
+    if verticalOffset ~= 0 then 
+        tex.sprint(string.format("\\raisebox{%fbp}{", -verticalOffset))
+    end
+
     tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
     
     if martyria.measureBarLeft and not string.match(martyria.measureBarLeft, 'Above$') then
@@ -415,6 +422,12 @@ local function print_martyria(martyria, pageSetup)
     end
 
     tex.sprint("}")
+
+    if verticalOffset ~= 0 then 
+        -- Close \raisebox
+        tex.sprint("}")
+    end
+
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
     tex.sprint("}")

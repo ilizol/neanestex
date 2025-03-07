@@ -1,5 +1,5 @@
 {
-  "appVersion": "0.4.74",
+  "appVersion": "0.4.77",
   "schemaVersion": 1,
   "sectionNames": [
     "stasis-1",
@@ -13,6 +13,7 @@
   },
   "pageSetup": {
     "lineHeight": 54,
+    "martyriaVerticalOffset": 3,
     "fontFamilies": {
       "dropCap": "Source Serif 4",
       "lyrics": "Source Serif 4",

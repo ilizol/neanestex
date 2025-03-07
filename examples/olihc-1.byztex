@@ -1,5 +1,5 @@
 {
-  "appVersion": "0.4.74",
+  "appVersion": "0.4.77",
   "schemaVersion": 1,
   "sectionNames": [],
   "fontVersions": {
@@ -9,6 +9,7 @@
   },
   "pageSetup": {
     "lineHeight": 54.72,
+    "martyriaVerticalOffset": 3,
     "fontFamilies": {
       "dropCap": "PFGoudy Initials",
       "lyrics": "Source Serif 4",
