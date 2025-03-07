@@ -104,6 +104,16 @@ local function codepoint_from_glyph_name(glyph_name)
     tex.sprint(data.glyph_name_to_codepoint_map[glyph_name])
 end
 
+local function find_mark_anchor_name(base, mark)
+    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
+        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
+            return anchor_name
+        end
+    end
+
+    return nil 
+end
+
 local function get_mark_offset(base, mark, extra_offset)
     local mark_anchor_name = find_mark_anchor_name(base, mark)
 
@@ -134,15 +144,6 @@ local function get_mark_offset(base, mark, extra_offset)
     }
 end
 
-local function find_mark_anchor_name(base, mark)
-    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
-        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
-            return anchor_name
-        end
-    end
-
-    return nil 
-end
 
 local function escape_latex(str)
     local replacements = {
