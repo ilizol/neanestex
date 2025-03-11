@@ -1,6 +1,6 @@
 {
-  "appVersion": "0.4.77",
-  "schemaVersion": 1,
+  "appVersion": "0.4.79",
+  "schemaVersion": 2,
   "sectionNames": [
     "stasis-1",
     "stasis-2",
@@ -27,7 +27,7 @@
       "neume": 20,
       "textBox": 20
     },
-    "lyricsVerticalOffset": -19.32,
+    "lyricsVerticalOffset": 17.43,
     "lyricsMelismaSpacing": 1.8,
     "lyricsMelismaThickness": 0.75,
     "colors": {

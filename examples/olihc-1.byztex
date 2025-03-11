@@ -1,6 +1,6 @@
 {
-  "appVersion": "0.4.77",
-  "schemaVersion": 1,
+  "appVersion": "0.4.79",
+  "schemaVersion": 2,
   "sectionNames": [],
   "fontVersions": {
     "Neanes": "1.0.0",
@@ -23,7 +23,7 @@
       "neume": 20,
       "textBox": 20
     },
-    "lyricsVerticalOffset": -18.6,
+    "lyricsVerticalOffset": 18.15,
     "lyricsMelismaSpacing": 1.8,
     "lyricsMelismaThickness": 0.75,
     "colors": {
@@ -55,7 +55,7 @@
               "type": "dropcap",
               "x": 0,
               "width": 53.04,
-              "verticalAdjustment": -6,
+              "verticalAdjustment": 6,
               "content": "L"
             },
             {
