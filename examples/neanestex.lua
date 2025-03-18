@@ -10,7 +10,9 @@ local err, warn, info, log = luatexbase.provides_module({
     license     = "GPL-3.0"
 })
 
-local schema_version = 1
+local schema_version = 2
+-- Schema changes
+-- 1 to 2: Positive lyricsVerticalOffset now moves lyrics down, making it consistent with other offsets in the schema
 
 local lualibs = require("lualibs")
 local json = utilities.json
@@ -105,6 +107,16 @@ local function codepoint_from_glyph_name(glyph_name)
     tex.sprint(data.glyph_name_to_codepoint_map[glyph_name])
 end
 
+local function find_mark_anchor_name(base, mark)
+    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
+        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
+            return anchor_name
+        end
+    end
+
+    return nil 
+end
+
 local function get_mark_offset(base, mark, extra_offset)
     local mark_anchor_name = find_mark_anchor_name(base, mark)
 
@@ -135,15 +147,6 @@ local function get_mark_offset(base, mark, extra_offset)
     }
 end
 
-local function find_mark_anchor_name(base, mark)
-    for anchor_name, _ in pairs(font_metadata.glyphsWithAnchors[mark] or {}) do
-        if font_metadata.glyphsWithAnchors[base] and font_metadata.glyphsWithAnchors[base][anchor_name] then
-            return anchor_name
-        end
-    end
-
-    return nil 
-end
 
 local function escape_latex(str)
     local replacements = {
@@ -342,7 +345,7 @@ local function print_note(note, pageSetup)
         if note.lyricsHorizontalOffset then offset = note.lyricsHorizontalOffset end
 
         tex.sprint(string.format("\\hspace{-%fbp}", note.width - offset))    
-        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, note.width - offset, lyricPos, fontSize, lyrics))
+        tex.sprint(string.format("\\raisebox{-%fbp}{%s{\\makebox[%fbp][%s]{\\fontsize{%s}{\\baselineskip}%s", pageSetup.lyricsVerticalOffset, color, note.width - offset, lyricPos, fontSize, lyrics))
 
         -- Melismas
         if note.melismaWidth and note.melismaWidth > 0 then
@@ -355,11 +358,11 @@ local function print_note(note, pageSetup)
             end
         end
 
-        -- close \raisebox{\makebox{}}
-        tex.sprint("}}")
+        -- close \raisebox{\makebox{\textcolor{}}}
+        tex.sprint("}}}")
     elseif note.isFullMelisma then
         tex.sprint(string.format("\\hspace{-%fbp}", note.width))    
-        tex.sprint(string.format("\\raisebox{%fbp}{\\makebox[%fbp][l]{", pageSetup.lyricsVerticalOffset, note.width))
+        tex.sprint(string.format("\\raisebox{-%fbp}{\\makebox[%fbp][l]{", pageSetup.lyricsVerticalOffset, note.width))
 
         if note.isHyphen then
             for _, hyphenOffset in ipairs(note.hyphenOffsets) do
@@ -383,6 +386,13 @@ end
 local function print_martyria(martyria, pageSetup) 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", martyria.x)) 
+
+    local verticalOffset = (pageSetup.martyriaVerticalOffset or 0) + (martyria.verticalOffset or 0)
+
+    if verticalOffset ~= 0 then 
+        tex.sprint(string.format("\\raisebox{-%fbp}{", verticalOffset))
+    end
+
     tex.sprint(string.format("\\textcolor{byzcolormartyria}{\\fontsize{\\byzneumesize}{\\baselineskip}\\byzneumefont"))
     
     if martyria.measureBarLeft and not string.match(martyria.measureBarLeft, 'Above$') then
@@ -416,6 +426,12 @@ local function print_martyria(martyria, pageSetup)
     end
 
     tex.sprint("}")
+
+    if verticalOffset ~= 0 then 
+        -- Close \raisebox
+        tex.sprint("}")
+    end
+
     tex.sprint(string.format("\\hspace{-%fbp}", martyria.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -martyria.x)) 
     tex.sprint("}")
@@ -449,7 +465,7 @@ local function print_drop_cap(dropCap, pageSetup)
 
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", dropCap.x)) 
-    tex.sprint(string.format("\\raisebox{%fbp}{{%s{\\fontsize{%s}{\\baselineskip}%s}}}", pageSetup.lyricsVerticalOffset + verticalAdjustment, color, font_size, content))    
+    tex.sprint(string.format("\\raisebox{-%fbp}{{%s{\\fontsize{%s}{\\baselineskip}%s}}}", pageSetup.lyricsVerticalOffset + verticalAdjustment, color, font_size, content))    
     tex.sprint(string.format("\\hspace{-%fbp}", dropCap.width))         
     tex.sprint(string.format("\\hspace{%fbp}", -dropCap.x)) 
     tex.sprint("}")
