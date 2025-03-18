@@ -459,6 +459,12 @@ local function print_drop_cap(dropCap, pageSetup)
     local weight = dropCap.fontWeight and string.format('\\addfontfeatures{Weight=%s}', dropCap.fontWeight) or default_weight
     local style = dropCap.fontStyle and dropCap.fontStyle or pageSetup.dropCapDefaultFontStyle
     local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(dropCap.content)) or escape_latex(dropCap.content)
+    -- TODO check this
+    -- dropCap.fontFamily = dropCap.fontFamily .. " Bold"
+    dropCap.fontFamily = "Alegreya Bold"
+    --if pageSetup.dropCapDefaultFontWeight == '700' then
+    --    dropCap.fontFamily = dropCap.fontFamily .. " Bold"
+    --end
     content = dropCap.fontFamily and string.format("{\\fontspec{%s}%s%s}", dropCap.fontFamily, weight, content) or string.format('\\byzdropcapfont{}{%s%s}', weight, content)
 
     local verticalAdjustment = dropCap.verticalAdjustment and dropCap.verticalAdjustment or 0 
@@ -529,6 +535,11 @@ local function print_mode_key(modeKey, pageSetup)
     tex.sprint("}")
 
     local height = modeKey.height
+    -- local height = 0
+    -- local height = 31
+    -- local height = 32
+    -- local height = 33.5
+    info("modeKey.height ".. modeKey.height)
     
     if modeKey.marginBottom then
         height = height + modeKey.marginBottom
@@ -578,6 +589,12 @@ local function print_text_box(textBox, pageSetup)
     local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
     local style = textBox.fontStyle and textBox.fontStyle or pageSetup.textBoxDefaultFontStyle
     local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
+    -- TODO check this
+    -- textBox.fontFamily = textBox.fontFamily .. " Bold"
+    -- textBox.fontFamily = "Alegreya Bold"
+    if textBox.fontWeight == '700' then
+        textBox.fontFamily = textBox.fontFamily .. " Bold"
+    end
     content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byztextboxfont{}{%s%s}', weight, content)
     
     if textBox.marginTop then
@@ -603,6 +620,10 @@ local function print_text_box(textBox, pageSetup)
     tex.sprint("}")
 
     local height = textBox.height
+    -- local height = 0
+    -- local height = 22
+    -- local height = 23
+    info("textBox.height ".. textBox.height)
     
     if textBox.marginBottom then
         height = height + textBox.marginBottom
