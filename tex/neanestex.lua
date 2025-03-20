@@ -617,6 +617,10 @@ end
 local function include_score(filename, sectionName)
     local data = json.tolua(read_json(filename))
 
+    if data == nil then
+        error("Score file could not be parsed because the JSON is invalid. Is there a typo? Filename: " .. filename)
+    end
+
     if schema_version < data.schemaVersion then
         warn(string.format("The score %s uses schema version %d. This version of neanestex only supports schema versions <= %d", filename, data.schemaVersion, schema_version))
     end
