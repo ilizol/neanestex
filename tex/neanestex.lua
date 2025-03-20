@@ -333,11 +333,12 @@ local function print_note(note, pageSetup)
         local lyricPos = note.lyricsLeftAlign and "l" or "c"
         local fontSize = note.lyricsFontSize and string.format('%fbp', note.lyricsFontSize) or '\\byzlyricsize'
         local color = note.lyricsColor and string.format('\\textcolor[HTML]{%s}', note.lyricsColor) or '\\textcolor{byzcolorlyrics}' 
-        local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
-        local weight = note.lyricsFontWeight and string.format('\\addfontfeatures{Weight=%s}', note.lyricsFontWeight) or default_weight
-        local style = note.lyricsFontStyle and note.lyricsFontStyle or pageSetup.lyricsDefaultFontStyle
-        local lyrics = style == 'italic' and string.format('\\textit{%s}', escape_latex(note.lyrics)) or escape_latex(note.lyrics)
-        lyrics = note.lyricsFontFamily and string.format("{\\fontspec{%s}%s%s}", note.lyricsFontFamily, weight, lyrics) or string.format('\\byzlyricfont{}{%s%s}', weight, lyrics)
+        local is_bold = note.lyricsFontWeight == '700' or pageSetup.lyricsDefaultFontWeight == '700'
+        local is_italic = note.lyricsFontStyle == 'italic' or pageSetup.lyricsDefaultFontStyle == 'italic'
+        local lyrics = escape_latex(note.lyrics)
+        lyrics = is_italic and string.format('\\textit{%s}', lyrics) or lyrics
+        lyrics = is_bold and string.format('\\textbf{%s}', lyrics) or lyrics
+        lyrics = note.lyricsFontFamily and string.format("{\\fontspec{%s}%s}", note.lyricsFontFamily, lyrics) or string.format('\\byzlyricfont{}{%s}', lyrics)
 
         local offset = 0
 
@@ -454,11 +455,12 @@ end
 local function print_drop_cap(dropCap, pageSetup) 
     local font_size = dropCap.fontSize and string.format("%fbp", dropCap.fontSize) or '\\byzdropcapsize' 
     local color = dropCap.color and string.format('\\textcolor[HTML]{%s}', dropCap.color) or '\\textcolor{byzcolordropcap}' 
-    local default_weight = pageSetup.dropCapDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.dropCapDefaultFontWeight) or ''
-    local weight = dropCap.fontWeight and string.format('\\addfontfeatures{Weight=%s}', dropCap.fontWeight) or default_weight
-    local style = dropCap.fontStyle and dropCap.fontStyle or pageSetup.dropCapDefaultFontStyle
-    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(dropCap.content)) or escape_latex(dropCap.content)
-    content = dropCap.fontFamily and string.format("{\\fontspec{%s}%s%s}", dropCap.fontFamily, weight, content) or string.format('\\byzdropcapfont{}{%s%s}', weight, content)
+    local is_bold = dropCap.fontWeight == '700' or pageSetup.dropCapDefaultFontWeight == '700'
+    local is_italic = dropCap.fontStyle == 'italic' or pageSetup.dropCapDefaultFontStyle == 'italic'
+    local content = escape_latex(dropCap.content)
+    content = is_italic and string.format('\\textit{%s}', content) or content
+    content = is_bold and string.format('\\textbf{%s}', content) or content    
+    content = dropCap.fontFamily and string.format("{\\fontspec{%s}%s}", dropCap.fontFamily, content) or string.format('\\byzdropcapfont{}{%s}', content)
 
     local verticalAdjustment = dropCap.verticalAdjustment and dropCap.verticalAdjustment or 0 
 
@@ -539,11 +541,12 @@ end
 local function print_text_box_inline(textBox, pageSetup)
     local font_size = textBox.fontSize and string.format('%fbp', textBox.fontSize) or '\\byzlyricsize'
     local color = textBox.color and string.format('\\textcolor[HTML]{%s}', textBox.color) or '\\textcolor{byzcolorlyrics}' 
-    local default_weight = pageSetup.lyricsDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.lyricsDefaultFontWeight) or ''
-    local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
-    local style = textBox.fontStyle and textBox.fontStyle or pageSetup.lyricsDefaultFontStyle
-    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
-    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byzlyricfont{}{%s%s}', weight, content)
+    local is_bold = textBox.fontWeight == '700' or pageSetup.lyricsDefaultFontWeight == '700'
+    local is_italic = textBox.fontStyle == 'italic' or pageSetup.lyricsDefaultFontStyle == 'italic'
+    local content = escape_latex(textBox.content)
+    content = is_italic and string.format('\\textit{%s}', content) or content
+    content = is_bold and string.format('\\textbf{%s}', content) or content    
+    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s}", textBox.fontFamily, content) or string.format('\\byzlyricfont{}{%s}', content)
     
     tex.sprint("\\mbox{")
     tex.sprint(string.format("\\hspace{%fbp}", textBox.x)) 
@@ -573,11 +576,12 @@ local function print_text_box(textBox, pageSetup)
 
     local font_size = textBox.fontSize and string.format('%fbp', textBox.fontSize) or '\\byztextboxsize'
     local color = textBox.color and string.format('\\color[HTML]{%s}', textBox.color) or '\\color{byzcolorlyrics}' 
-    local default_weight = pageSetup.textBoxDefaultFontWeight and string.format('\\addfontfeatures{Weight=%s}', pageSetup.textBoxDefaultFontWeight) or ''
-    local weight = textBox.fontWeight and string.format('\\addfontfeatures{Weight=%s}', textBox.fontWeight) or default_weight
-    local style = textBox.fontStyle and textBox.fontStyle or pageSetup.textBoxDefaultFontStyle
-    local content = style == 'italic' and string.format('\\textit{%s}', escape_latex(textBox.content)) or escape_latex(textBox.content)
-    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s%s}", textBox.fontFamily, weight, content) or string.format('\\byztextboxfont{}{%s%s}', weight, content)
+    local is_bold = textBox.fontWeight == '700' or pageSetup.textBoxDefaultFontWeight == '700'
+    local is_italic = textBox.fontStyle == 'italic' or pageSetup.textBoxDefaultFontStyle == 'italic'
+    local content = escape_latex(textBox.content)
+    content = is_italic and string.format('\\textit{%s}', content) or content
+    content = is_bold and string.format('\\textbf{%s}', content) or content    
+    content = textBox.fontFamily and string.format("{\\fontspec{%s}%s}", textBox.fontFamily, content) or string.format('\\byztextboxfont{}{%s}', content)
     
     if textBox.marginTop then
         tex.sprint('\\vspace{-\\baselineskip}')
